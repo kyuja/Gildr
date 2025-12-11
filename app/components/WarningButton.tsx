@@ -1,5 +1,6 @@
 import React from 'react';
 import { GestureResponderEvent, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import Svg, { Polygon } from "react-native-svg";
 
 type Props = {
 	onPress?: (e: GestureResponderEvent) => void;
@@ -9,13 +10,25 @@ type Props = {
 };
 
 export default function WarningButton({ onPress}: Props) {
+	const triangleSize = 90;        
+ 	const half = triangleSize / 2;
+	
 	return (
 		<TouchableOpacity
 			accessibilityLabel="Warning"
 			activeOpacity={0.8}
 			onPress={onPress}
-			style={[styles.triangle]}
+			style={[styles.triangle, { width: triangleSize, height: triangleSize }]}
 		>
+			<Svg width={triangleSize} height={triangleSize} style= {{marginBottom: -20, position: 'absolute', top: 690, left:100}}>
+				<Polygon
+					points={`${half},0 0,${triangleSize} ${triangleSize},${triangleSize}`}
+					fill="rgba(186, 0, 41, 1)"
+					stroke="rgba(186, 0, 41, 1)"
+					strokeWidth = {2}
+					strokeLinejoin="round" 
+				/>
+			</Svg>
 			<Text style={[styles.text]}>!</Text>
 		</TouchableOpacity>
 	);
@@ -23,16 +36,10 @@ export default function WarningButton({ onPress}: Props) {
 
 const styles = StyleSheet.create({
 	triangle: {
-        width: 0,
-        height: 0,
         borderStyle: "solid",
-        borderLeftWidth: 50,
-        borderRightWidth: 50,
-        borderBottomWidth: 100,
 		position: 'absolute',
 		alignItems: 'center',
 		justifyContent: 'center',
-		backgroundColor: 'rgba(186, 0, 41, 1)',
 		shadowColor: '#000',
 		shadowOffset: { width: 0, height: 4 },
 		shadowOpacity: 0.25,
@@ -45,6 +52,10 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(7, 7, 7, 0.9)',
    },
 	text: {
+		position: "absolute",
+		top: 720,
+		left:138,
+		fontSize: 40,
 		color: '#080808ff',
 		fontWeight: '800',
         textAlign: 'center'

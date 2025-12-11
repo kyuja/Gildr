@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: '700',
     fontSize: 30,
+    color: '#000000ff'
   },
   textPrimary: {
     color: '#5a0b0b',
