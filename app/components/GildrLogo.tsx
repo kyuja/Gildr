@@ -1,9 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ViewStyle } from 'react-native';
 
-export default function GildrLogo({ size = 40 }: { size?: number }) {
+type Props = {
+  size?: number;
+  style?: ViewStyle | ViewStyle[];
+};
+
+export default function GildrLogo({ size = 40, style }: Props) {
   return (
-    <View style={styles.wrapper}>
+    <View style={[styles.wrapper, style]}>
       <Text style={[styles.text, { fontSize: size }]}>Gildr</Text>
     </View>
   );
