@@ -2,9 +2,10 @@ import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-export default function Chat() {
+export default function BeitretenScreen() {
   return (
     <View style={styles.container}>
+      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
           <Ionicons name="arrow-back" size={40} color="#fff" />
@@ -14,7 +15,21 @@ export default function Chat() {
           <Ionicons name="settings-outline" size={40} color="#fff" />
         </TouchableOpacity>
       </View>
-      <Text style={styles.title}>Chat</Text>
+
+      {/* Content */}
+      <View style={styles.content}>
+        <Text style={styles.title}>Generic Title</Text>
+
+        <Text style={styles.description}>Beschreibung ...</Text>
+      </View>
+
+      {/* Join Button */}
+      <TouchableOpacity
+        style={styles.joinButton}
+        //onPress={() => router.push("/chat")}
+      >
+        <Text style={styles.joinText}>Beitreten</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -33,6 +48,10 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
 
+  content: {
+    flex: 1,
+  },
+
   title: {
     backgroundColor: "#fff",
     textAlign: "center",
@@ -42,5 +61,26 @@ const styles = StyleSheet.create({
     height: 50,
     fontWeight: "bold",
     marginBottom: 20,
+  },
+
+  description: {
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    padding: 20,
+    height: 400,
+    fontSize: 20,
+  },
+
+  joinButton: {
+    backgroundColor: "#fff",
+    borderRadius: 20,
+    alignItems: "center",
+    paddingVertical: 10,
+    marginBottom: 100,
+  },
+
+  joinText: {
+    fontWeight: "600",
+    fontSize: 20,
   },
 });
