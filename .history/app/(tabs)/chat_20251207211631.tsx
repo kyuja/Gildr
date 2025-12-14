@@ -1,0 +1,35 @@
+import React from "react";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+
+
+export default function ChatLayout() {
+  return (
+    <View>
+    <Text>Chat Layout</Text>
+    <View style={styles.chatContainer}>
+    <ScrollView style={styles.messageArea}>
+        
+    </ScrollView>
+    </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+    chatContainer: {
+        flex: 1,
+        backgroundColor:'blue',
+    },
+    messageArea: {
+        paddingHorizontal:10,
+        paddingVertical:5,
+        flexGrow:1,  
+    },
+    messageContainer: {
+        alignSelf:'center',
+        backgroundColor:'yellow',
+        paddingHorizontal:10,
+        paddingVertical:5,
+        width:'90%',
+    },
+})
