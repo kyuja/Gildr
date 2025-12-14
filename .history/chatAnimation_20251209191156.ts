@@ -1,0 +1,5 @@
+function ChatAnimation() {
+    
+    
+    return null;
+}
