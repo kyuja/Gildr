@@ -6,6 +6,8 @@ export default function TabsLayout() {
       <Tabs.Screen name="guilds" options={{ title: "Gilden" }} />
       <Tabs.Screen name="home" options={{ title: "Home" }} />
       <Tabs.Screen name="favorites" options={{ title: "Favoriten" }} />
+      <Tabs.Screen name="gilde-erstellen" options={{ title: "Erstellen" }} />
+      <Tabs.Screen name="gilde-bearbeiten" options={{ title: "Bearbeiten" }} />
     </Tabs>
   );
 }
