@@ -2,9 +2,11 @@ import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
+
 export default function BeitretenScreen() {
   return (
     <View style={styles.container}>
+
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
@@ -26,10 +28,10 @@ export default function BeitretenScreen() {
       {/* Join Button */}
       <TouchableOpacity
         style={styles.joinButton}
-        //onPress={() => router.push("/chat")}
+        onPress={() => router.push("/(tabs)/chat")}
       >
-        <Text style={styles.joinText}>Beitreten</Text>
-      </TouchableOpacity>
+          <Text style={styles.joinText}>Beitreten</Text>
+        </TouchableOpacity>
     </View>
   );
 }

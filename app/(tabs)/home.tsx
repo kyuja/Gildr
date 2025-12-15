@@ -57,7 +57,7 @@ export default function HomeScreen() {
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.card}
-            onPress={() => router.push("/(stacks)/details")}
+            onPress={() => router.push("/(tabs)/listView")}
           >
             <View style={styles.cardInner} />
             <Text style={styles.cardText}>{item.name}</Text>
