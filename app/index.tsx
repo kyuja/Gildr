@@ -6,7 +6,7 @@ import WarningButton from './components/WarningButton';
 
 export default function Start() {
   return (
-    <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', backgroundColor: '#5a0b0b', paddingTop: 150, width: '100%' }}>
+    <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', backgroundColor: '#77363E', paddingTop: 150, width: '100%' }}>
       
 
       <GildrLogo size={56} />

@@ -11,13 +11,15 @@ export default function LoginScreen() {
   const [pw, setPw] = useState("");
 
   return (
-    <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', backgroundColor: '#5a0b0b', paddingTop: 150, width: '100%' }}>
-       <BackButton />
+    <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', backgroundColor: '#77363E', paddingTop: 150, width: '100%' }}>
+       <View style={{ width: "100%", paddingHorizontal: 30, alignItems: "flex-start", top:-80 }}>
+        <BackButton />
+        </View>
 
-      <GildrLogo size={35} style={{position: "absolute", top: 120, left: 40}}/>
-      <Text style={{ position: "absolute", top: 160, left: 42, fontSize: 40, fontWeight: "700", fontFamily:"Inter-Bold", color:"#f3f3f3", textAlign: "left"}}>LOGIN</Text>
+      <GildrLogo size={35} style={{position: "absolute", top: 140, left: 40}}/>
+      <Text style={{ position: "absolute", top: 180, left: 42, fontSize: 40, fontWeight: "700", fontFamily:"Inter-Bold", color:"#f3f3f3", textAlign: "left"}}>LOGIN</Text>
       
-      <View style={{ height: 140 }} /> 
+      <View style={{ height: 122 }} /> 
        <InputField
         style={{ height: 60, fontSize: 24, width: 304}}
         label=""
