@@ -105,7 +105,7 @@ export default function listView() {
         </View>
         </View>
         
-        <View style={{ height: 39 }}/>
+        <View style={{ height: 32 }}/>
        <FlatList
         data={DATA}
         keyExtractor={(item) => item.id}
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
   },
   titlePill: {
   backgroundColor: "#fff",
-  borderRadius: 12,
+  borderRadius: 12,     
   paddingVertical: 10,
   paddingHorizontal: 20,
   alignSelf: "center",
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 15,
-    paddingVertical: 17
+    paddingVertical: 14
   },
   input: {
     marginLeft: 6,

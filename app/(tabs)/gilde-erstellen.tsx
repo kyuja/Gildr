@@ -1,18 +1,15 @@
+import { Ionicons } from "@expo/vector-icons";
 import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import BackButton from "../components/BackButton";
 
 export default function GildeErstellen() {
   return (
     <View style={styles.screen}>
       <View style={styles.header}>
-        <Pressable style={styles.roundBtn}>
-          <Text style={styles.roundBtnText}>←</Text>
-        </Pressable>
-
+        <BackButton></BackButton>
         <Text style={styles.headerTitle}>Gilde erstellen</Text>
 
-        <Pressable style={styles.roundBtn}>
-          <Text style={styles.roundBtnText}>⚙</Text>
-        </Pressable>
+       <Ionicons name="settings-outline" size={40} color="#fff" />
       </View>
 
       <View style={styles.card}>

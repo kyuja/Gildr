@@ -20,7 +20,7 @@ export default function WarningButton({ onPress}: Props) {
 			onPress={onPress}
 			style={[styles.triangle, { width: triangleSize, height: triangleSize }]}
 		>
-			<Svg width={triangleSize} height={triangleSize} style= {{marginBottom: -20, position: 'absolute', top: 690, left:100}}>
+			<Svg width={triangleSize} height={triangleSize}>
 				<Polygon
 					points={`${half},0 0,${triangleSize} ${triangleSize},${triangleSize}`}
 					fill="rgba(186, 0, 41, 1)"
@@ -40,12 +40,10 @@ const styles = StyleSheet.create({
 		position: 'absolute',
 		alignItems: 'center',
 		justifyContent: 'center',
-		shadowColor: '#000',
-		shadowOffset: { width: 0, height: 4 },
-		shadowOpacity: 0.25,
-		shadowRadius: 4,
-		elevation: 6,
 		zIndex: 50,
+		bottom: 40,
+    	right: 30,
+		paddingBottom: 30,
 	},
     outline: {
     borderWidth: 1,
@@ -53,8 +51,7 @@ const styles = StyleSheet.create({
    },
 	text: {
 		position: "absolute",
-		top: 720,
-		left:138,
+		paddingBottom: 10,
 		fontSize: 40,
 		color: '#080808ff',
 		fontWeight: '800',

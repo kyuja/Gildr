@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import BackButton from "../components/BackButton";
 
 
 export default function BeitretenScreen() {
@@ -9,9 +10,7 @@ export default function BeitretenScreen() {
 
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={40} color="#fff" />
-        </TouchableOpacity>
+        <BackButton></BackButton>
 
         <TouchableOpacity>
           <Ionicons name="settings-outline" size={40} color="#fff" />
