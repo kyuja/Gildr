@@ -3,11 +3,9 @@ import { router } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import BackButton from "../components/BackButton";
 
-
 export default function BeitretenScreen() {
   return (
     <View style={styles.container}>
-
       {/* Header */}
       <View style={styles.header}>
         <BackButton></BackButton>
@@ -29,8 +27,8 @@ export default function BeitretenScreen() {
         style={styles.joinButton}
         onPress={() => router.push("/(tabs)/chat")}
       >
-          <Text style={styles.joinText}>Beitreten</Text>
-        </TouchableOpacity>
+        <Text style={styles.joinText}>Beitreten</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -38,7 +36,7 @@ export default function BeitretenScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#300000",
+    backgroundColor: "#77363E",
     paddingTop: 60,
     paddingHorizontal: 30,
   },

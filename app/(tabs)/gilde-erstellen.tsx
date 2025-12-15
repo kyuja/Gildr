@@ -1,5 +1,12 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import BackButton from "../components/BackButton";
 
 export default function GildeErstellen() {
@@ -9,21 +16,40 @@ export default function GildeErstellen() {
         <BackButton></BackButton>
         <Text style={styles.headerTitle}>Gilde erstellen</Text>
 
-       <Ionicons name="settings-outline" size={40} color="#fff" />
+        <Ionicons name="settings-outline" size={40} color="#fff" />
       </View>
 
       <View style={styles.card}>
-        <ScrollView contentContainerStyle={styles.form} showsVerticalScrollIndicator={false}>
-          <TextInput style={styles.input} placeholder="Name" placeholderTextColor="#777" />
-          <TextInput style={styles.input} placeholder="Kategorie" placeholderTextColor="#777" />
+        <ScrollView
+          contentContainerStyle={styles.form}
+          showsVerticalScrollIndicator={false}
+        >
+          <TextInput
+            style={styles.input}
+            placeholder="Name"
+            placeholderTextColor="#777"
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Kategorie"
+            placeholderTextColor="#777"
+          />
           <TextInput
             style={[styles.input, styles.textarea]}
             placeholder="Beschreibung"
             placeholderTextColor="#777"
             multiline
           />
-          <TextInput style={styles.input} placeholder="Ort" placeholderTextColor="#777" />
-          <TextInput style={styles.input} placeholder="Wann" placeholderTextColor="#777" />
+          <TextInput
+            style={styles.input}
+            placeholder="Ort"
+            placeholderTextColor="#777"
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Wann"
+            placeholderTextColor="#777"
+          />
 
           <View style={styles.uploadRow}>
             <Text style={styles.uploadLabel}>Logo</Text>
@@ -54,13 +80,27 @@ export default function GildeErstellen() {
 }
 
 const styles = StyleSheet.create({
-  screen: { flex: 1, backgroundColor: "#3a000a", paddingHorizontal: 18, paddingTop: 18 },
-  header: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: 14 },
+  screen: {
+    flex: 1,
+    backgroundColor: "#77363E",
+    paddingHorizontal: 18,
+    paddingTop: 18,
+  },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 14,
+  },
   headerTitle: { color: "#fff", fontSize: 24, fontWeight: "700" },
 
   roundBtn: {
-    width: 42, height: 42, borderRadius: 999, backgroundColor: "#f5e2e2",
-    alignItems: "center", justifyContent: "center",
+    width: 42,
+    height: 42,
+    borderRadius: 999,
+    backgroundColor: "#f5e2e2",
+    alignItems: "center",
+    justifyContent: "center",
   },
   roundBtnText: { fontSize: 20, color: "#2b0010", fontWeight: "700" },
 
@@ -68,23 +108,42 @@ const styles = StyleSheet.create({
   form: { gap: 10, paddingBottom: 20 },
 
   input: {
-    backgroundColor: "#dedede", borderRadius: 10, paddingHorizontal: 10, paddingVertical: 10,
-    fontSize: 16, fontWeight: "600", color: "#444",
+    backgroundColor: "#dedede",
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#444",
   },
   textarea: { minHeight: 110, textAlignVertical: "top" },
 
-  uploadRow: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: 12 },
+  uploadRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 12,
+  },
   uploadLabel: { fontSize: 16, fontWeight: "700", color: "#444" },
   uploadBox: {
-    flex: 1, backgroundColor: "#dedede", borderRadius: 10, paddingVertical: 14,
-    alignItems: "center", justifyContent: "center",
+    flex: 1,
+    backgroundColor: "#dedede",
+    borderRadius: 10,
+    paddingVertical: 14,
+    alignItems: "center",
+    justifyContent: "center",
   },
   uploadIcon: { fontSize: 22, fontWeight: "700", color: "#444" },
 
   actions: { flexDirection: "row", gap: 12, marginTop: 14 },
   btn: {
-    flex: 1, borderRadius: 10, paddingVertical: 10, alignItems: "center", justifyContent: "center",
-    borderWidth: 1, borderColor: "#b00020",
+    flex: 1,
+    borderRadius: 10,
+    paddingVertical: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: "#b00020",
   },
   btnCancel: { backgroundColor: "#ffecec" },
   btnOk: { backgroundColor: "#b00020" },
