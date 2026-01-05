@@ -114,7 +114,7 @@ export default function MeineGilden() {
             onToggle={() => toggleFavorite(item.id)}
             onPress={() =>
               router.push({
-                pathname: "/(tabs)/details",
+                pathname: "/(tabs)/gilde-bearbeiten",
                 params: { id: item.id },
               })
             }
