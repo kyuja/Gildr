@@ -80,6 +80,13 @@ export default function TabsLayout() {
           href: null,          
         }}
         />
+
+        <Tabs.Screen
+        name="gilde-bearbeiten"
+        options={{
+          href: null,          
+        }}
+        />
       
   
 
