@@ -254,10 +254,7 @@ fabText: {
   lineHeight: 16,
 },
 
-listContent: {
-  paddingBottom: 160, // Platz für FAB
-  gap: 14,
-},
+
 
 
 });

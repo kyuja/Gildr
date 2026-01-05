@@ -73,6 +73,13 @@ export default function TabsLayout() {
           href: null,          
         }}
         />
+
+        <Tabs.Screen
+        name="gilde-erstellen"
+        options={{
+          href: null,          
+        }}
+        />
       
   
 
