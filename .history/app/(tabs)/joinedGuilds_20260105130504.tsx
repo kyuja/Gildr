@@ -134,7 +134,7 @@ export default function HomeScreen() {
             onToggle={() => toggleFavorite(item.id)}
             onPress={() =>
               router.push({
-                pathname: "/chat",
+                pathname: "",
                 params: { id: item.id },
               })
             }

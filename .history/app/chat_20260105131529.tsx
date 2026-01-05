@@ -1,11 +1,11 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Audio } from "expo-av";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import React from "react";
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { ChatAnimation } from "../../chatAnimation";
-import { BackAndSettingHeader } from "../components/BackAndSettingsHeader";
+import { ChatAnimation } from "../chatAnimation";
+import { BackAndSettingHeader } from "./components/BackAndSettingsHeader";
 
 
 const messages = [
@@ -34,7 +34,7 @@ export default function ChatLayout() {
         let mounted = true;
         (async () => {
             const { sound } = await Audio.Sound.createAsync(
-            require("../../assets/sounds/chat_send_sound.mp3"),
+            require("../assets/sounds/chat_send_sound.mp3"),
             {shouldPlay: false}
             );
             if (mounted) sendSoundRef.current = sound
@@ -99,15 +99,18 @@ export default function ChatLayout() {
         >
         <View style={styles.screenContainer}>
 
-        <BackAndSettingHeader useBack={false} backHref={"../chat"} useFallbackHref={"../home"} settingsHref={"/home"}/>
-
-        <Link href='../manageGuildMembers' asChild>    
-        <TouchableOpacity style={styles.header}>
+        <BackAndSettingHeader useBack={true} useFallbackHref={"../home"} settingsHref={"/home"}/>
+  
+        <TouchableOpacity style={styles.header} onPress={() =>
+                      router.push({
+                        pathname: "/chat",
+                        params: { id: item.id },
+                      })
+                    }>
             <View style={{width: 24}}/>
             <Text style={{fontSize: 20, fontWeight: 'bold'}}>Beispiel Gildenname</Text>
             <Ionicons name="pencil" color={'black'} size={24}> </Ionicons>
         </TouchableOpacity>
-        </Link>
 
         <View style={styles.chatContainer}>
         <ScrollView contentContainerStyle={styles.messageArea} ref={scrollViewRef} onContentSizeChange={() => scrollViewRef.current?.scrollToEnd({animated:true})}>
