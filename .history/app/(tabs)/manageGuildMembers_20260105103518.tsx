@@ -15,43 +15,51 @@ const members = [
   { id: 6, name: "Mitglied 6" },
 ];
 
-export default function ManageGuildMembers() {
-  const insets = useSafeAreaInsets();
-
+export default function manageGuildMembers() {
   const [memberList, setMemberList] = React.useState(members);
   const [memberDeleteFlag, setMemberDeleteFlag] = React.useState<number[]>([]);
 
-  const isMarkedForDeletion = (id: number) =>
-    memberDeleteFlag.includes(id);
+    const insets = useSafeAreaInsets();
+    const [memberList, setMemberList] = React.useState(members)
+    const [memberDeleteFlag, setMemberDeleteFlag] = React.useState<number[]>([]);
 
-  const toggleMemberDelete = async (id: number) => {
-    setMemberDeleteFlag((prev) =>
-      prev.includes(id) ? prev.filter((mid) => mid !== id) : [...prev, id]
-    );
-    await Haptics.selectionAsync();
+    const toggleMemberDelete = async (id: number) => {
+        if (memberDeleteFlag.includes(id)) {
+            setMemberDeleteFlag(memberDeleteFlag.filter(mid => mid !== id))
+        } else {
+            setMemberDeleteFlag([...memberDeleteFlag, id])
+        };
+        await Haptics.selectionAsync();
+    }
+
+    const deleteMember = () => {
+        setMemberList(memberList.filter(member => !memberDeleteFlag.includes(member.id)))
+        setMemberDeleteFlag([]);
+    }
   };
 
   const deleteMember = () => {
-    setMemberList((prev) =>
-      prev.filter((member) => !memberDeleteFlag.includes(member.id))
+    setMemberList(
+      memberList.filter((member) => !memberDeleteFlag.includes(member.id))
     );
     setMemberDeleteFlag([]);
   };
+
+    return (
+    <KeyboardAvoidingView style={{flex :1}} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            keyboardVerticalOffset={-60} 
+            >
+        <View style={styles.screenContainer}>
+
+        <BackAndSettingHeader useBack={false} backHref={"../chat"} useFallbackHref={"../home"} settingsHref={"/home"}/>
 
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      keyboardVerticalOffset={insets.top + 20}
+      keyboardVerticalOffset={-60}
     >
       <View style={styles.screenContainer}>
-        <BackAndSettingHeader
-          useBack={false}
-          backHref={"../chat"}
-          useFallbackHref={"../home"}
-          settingsHref={"/home"}
-        />
-
         <Pressable style={styles.header}>
           <Text style={{ fontSize: 20, fontWeight: "bold" }}>
             Beispiel Gildenname
@@ -65,50 +73,31 @@ export default function ManageGuildMembers() {
 
         <Text style={styles.membersBar}>Mitglieder</Text>
 
-        <View style={{ backgroundColor: "white", borderRadius: 10, padding: 10, marginTop: 10, height: 300 }}>
-          <ScrollView>
-            {memberList.map((member) => (
-              <View
-                key={member.id}
-                style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}
-              >
-                <Text
-                  style={{
-                    fontWeight: "bold",
-                    color: isMarkedForDeletion(member.id) ? "gray" : "black",
-                  }}
-                >
-                  {member.name}
-                </Text>
+        <View style={{backgroundColor:'white',borderRadius:10,padding:10,marginTop:10, height:300}}>
+            
+            <ScrollView>
+                {memberList.map( (member) => (
+                    <View key={member.id} style={{flexDirection:'row', alignItems:'center', justifyContent: 'space-between'}}>
+                    <Text style={{fontWeight: 'bold', color: isMarkedForDeletion(member.id) ? 'gray' : 'black'}}> {member.name}</Text>
+                    <TouchableOpacity onPress={() => toggleMemberDelete(member.id)}>
+                        <Ionicons name="remove-circle" size={40} style={{right:10,padding:5, color:isMarkedForDeletion(member.id) ? 'maroon' : 'black'}}></Ionicons>
+                    </TouchableOpacity>
+                    </View>
+                ))}
+            </ScrollView>
 
-                <TouchableOpacity onPress={() => toggleMemberDelete(member.id)}>
-                  <Ionicons
-                    name="remove-circle"
-                    size={40}
-                    style={{
-                      right: 10,
-                      padding: 5,
-                      color: isMarkedForDeletion(member.id)
-                        ? "maroon"
-                        : "black",
-                    }}
-                  />
-                </TouchableOpacity>
-              </View>
-            ))}
-          </ScrollView>
         </View>
 
-        <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 20 }}>
-          <Link href="../chat" asChild>
+        <View style={{flexDirection:'row', justifyContent:'space-between', marginTop:20 }}>
+            <Link href='../chat' asChild>
             <TouchableOpacity style={styles.saveButton}>
-              <Text style={{ fontSize: 20, fontWeight: "bold" }}>Abbrechen</Text>
+                <Text style={{fontSize: 20, fontWeight: 'bold'}}>Abbrechen</Text>
             </TouchableOpacity>
-          </Link>
+            </Link>
 
-          <TouchableOpacity style={styles.saveButton} onPress={deleteMember}>
-            <Text style={{ fontSize: 20, fontWeight: "bold" }}>Bestätigen</Text>
-          </TouchableOpacity>
+            <TouchableOpacity style={styles.saveButton} onPress= {deleteMember}>
+                <Text style={{fontSize: 20, fontWeight: 'bold'}}>Bestätigen</Text>
+            </TouchableOpacity>
         </View>
       </View>
     </KeyboardAvoidingView>

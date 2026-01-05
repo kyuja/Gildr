@@ -1,20 +1,3 @@
-import { Ionicons } from "@expo/vector-icons";
-import * as Haptics from "expo-haptics";
-import { Link } from "expo-router";
-import React from "react";
-import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { BackAndSettingHeader } from "../components/BackAndSettingsHeader";
-
-const members = [
-  { id: 1, name: "Mitglied 1" },
-  { id: 2, name: "Mitglied 2" },
-  { id: 3, name: "Mitglied 3" },
-  { id: 4, name: "Mitglied 4" },
-  { id: 5, name: "Mitglied 5" },
-  { id: 6, name: "Mitglied 6" },
-];
-
 export default function ManageGuildMembers() {
   const insets = useSafeAreaInsets();
 
@@ -114,56 +97,3 @@ export default function ManageGuildMembers() {
     </KeyboardAvoidingView>
   );
 }
-
-const styles = StyleSheet.create({
-    header:{
-        backgroundColor:'#FFF',
-        borderRadius:10,
-        flexDirection:'row',
-        justifyContent:'center',
-        alignItems:'center',
-        paddingVertical:15,
-        marginTop:10,
-        marginBottom:10,
-    },
-    saveButton:{
-        backgroundColor:'#FFECED',
-        borderRadius:10,
-        paddingVertical:15,
-        paddingHorizontal:38,
-        marginTop:10,
-        marginBottom:10,
-    },
-    screenContainer: {
-        flex: 1,
-        paddingHorizontal: 10,
-        paddingBottom: 70,
-        backgroundColor:'#77363E',
-    },
-    inputBar: {
-        color: 'black',
-        marginTop: 10,
-        padding: 10,
-        paddingBottom: 80,
-        fontSize: 16,
-        backgroundColor: 'white',
-        borderRadius: 10,
-    },
-    membersBar: {
-        color: 'black',
-        marginTop: 10,
-        padding: 10,
-        marginRight: 265,
-        fontSize: 16,
-        fontWeight: 'bold',
-        backgroundColor: 'white',
-        borderRadius: 10,
-    },
-    headerActions: {
-        borderRadius:10,
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center',
-        marginBottom:10,
-    }
-})

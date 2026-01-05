@@ -23,6 +23,8 @@ export default function ChatLayout() {
   const [initmessages, setMessages] = React.useState<
     { id: number; text: string; isUser: boolean }[]
   >([]);
+
+    
     
     const scrollViewRef = React.useRef<ScrollView | null>(null);
     const hasStartedRef = React.useRef(false);
