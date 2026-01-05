@@ -1,0 +1,84 @@
+import { Ionicons } from "@expo/vector-icons";
+import { Link } from "expo-router";
+import React from "react";
+import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { BackAndSettingHeader } from "../components/BackAndSettingsHeader";
+
+export default function HomeScreen() {
+  return (
+    <KeyboardAvoidingView style={{flex :1}} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                keyboardVerticalOffset={-60} 
+                >
+            <View style={styles.screenContainer}>
+    
+                <BackAndSettingHeader useBack={true} useFallbackHref={"../home"} settingsHref={"/home"}/>
+    
+            <Pressable style={styles.header}>
+                <Text style={{fontSize: 20, fontWeight: 'bold'}}>Beispiel Gildenname</Text>
+            </Pressable>
+    
+            <TextInput style={styles.inputBar} 
+                        placeholder="Beschreibung eingeben..." 
+            />
+    
+            <Text style={styles.membersBar}>Mitglieder</Text>
+            
+        </View>
+        </KeyboardAvoidingView>
+  );
+}
+
+
+const styles = StyleSheet.create({
+    header:{
+        backgroundColor:'#FFECED',
+        borderRadius:10,
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center',
+        paddingVertical:15,
+        marginTop:10,
+        marginBottom:10,
+    },
+    saveButton:{
+        backgroundColor:'#FFECED',
+        borderRadius:10,
+        paddingVertical:15,
+        paddingHorizontal:38,
+        marginTop:10,
+        marginBottom:10,
+    },
+    screenContainer: {
+        flex: 1,
+        paddingHorizontal: 10,
+        paddingBottom: 70,
+        backgroundColor:'#77363E',
+    },
+    inputBar: {
+        color: 'black',
+        marginTop: 10,
+        padding: 10,
+        paddingBottom: 80,
+        fontSize: 16,
+        backgroundColor: 'white',
+        borderRadius: 10,
+    },
+    membersBar: {
+        color: 'black',
+        marginTop: 10,
+        padding: 10,
+        marginRight: 265,
+        fontSize: 16,
+        fontWeight: 'bold',
+        backgroundColor: 'white',
+        borderRadius: 10,
+    },
+    headerActions: {
+        borderRadius:10,
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center',
+        marginBottom:10,
+    }
+})
