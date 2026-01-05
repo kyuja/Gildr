@@ -3,10 +3,11 @@ import { Stack } from "expo-router";
 export default function RootLayout() {
   return (
     <Stack screenOptions={{ headerShown: false }}>
-
-      <Stack.Screen name="(auth)" />
+      {/* Deine Tabs als "Hauptbereich" */}
+      
       <Stack.Screen name="(tabs)" />
 
+      {/* Alles außerhalb der Tabs ist Stack-Navigation */}
       <Stack.Screen name="listView" />
       <Stack.Screen name="details" />
       <Stack.Screen name="chat" />
@@ -14,6 +15,7 @@ export default function RootLayout() {
       <Stack.Screen name="gilde-erstellen" />
       <Stack.Screen name="gilde-bearbeiten" />
 
+      {/* Auth */}
       <Stack.Screen name="login" />
       <Stack.Screen name="register" />
     </Stack>
