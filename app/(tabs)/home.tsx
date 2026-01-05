@@ -47,13 +47,17 @@ export default function HomeScreen() {
         <Ionicons name="settings-outline" size={40} color="#fff" />
       </View>
 
+      <View style={styles.content}>
+        <Text style={styles.title}>Entdecke Kategorien</Text>
+      </View>
+
       {/* Categories */}
       <FlatList
         data={categories}
         numColumns={3}
         keyExtractor={(item) => item.id}
         columnWrapperStyle={{ justifyContent: "space-between" }}
-        contentContainerStyle={{ marginTop: 30 }}
+        contentContainerStyle={{ marginTop: 10 }}
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.card}
@@ -72,13 +76,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#77363E",
-    paddingTop: 65,
+    paddingTop: 70,
     paddingHorizontal: 20,
   },
   searchRow: {
     flexDirection: "row",
     alignItems: "center",
     gap: 10,
+    marginBottom: 20,
   },
   searchBar: {
     flex: 1,
@@ -94,18 +99,36 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
   },
+
+  content: {
+    flex: 1,
+    marginBottom: 50,
+  },
+
+  title: {
+    backgroundColor: "#fff",
+    textAlign: "center",
+    textAlignVertical: "center",
+    fontSize: 20,
+    borderRadius: 10,
+    height: 40,
+    fontWeight: "bold",
+  },
+
   card: {
     width: "30%",
     height: 120,
     backgroundColor: "#fff",
     borderRadius: 12,
-    marginBottom: 20,
+    marginBottom: 10,
     justifyContent: "flex-end",
     paddingBottom: 8,
   },
+
   cardInner: {
     flex: 1,
   },
+
   cardText: {
     textAlign: "center",
     fontSize: 14,
