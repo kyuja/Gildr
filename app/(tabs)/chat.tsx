@@ -9,12 +9,20 @@ import { BackAndSettingHeader } from "../components/BackAndSettingsHeader";
 
 
 const messages = [
-        { id: 1, text: "Das freut mich!", isUser: false},
-        { id: 2, text: "Wann haben wir eigentlich das nächste Treffen geplant?", isUser: false},
-        { id: 3, text: "Am nächsten Montag um 18 Uhr.", isUser: false }
+  { id: 1, text: "Das freut mich!", isUser: false },
+  {
+    id: 2,
+    text: "Wann haben wir eigentlich das nächste Treffen geplant?",
+    isUser: false,
+  },
+  { id: 3, text: "Am nächsten Montag um 18 Uhr.", isUser: false },
 ];
 
 export default function ChatLayout() {
+  const [inputText, setInputText] = React.useState("");
+  const [initmessages, setMessages] = React.useState<
+    { id: number; text: string; isUser: boolean }[]
+  >([]);
 
     const [inputText, setInputText] = React.useState("");
     const [initmessages, setMessages] = React.useState<
@@ -108,9 +116,15 @@ export default function ChatLayout() {
         <View style={styles.chatContainer}>
         <ScrollView contentContainerStyle={styles.messageArea} ref={scrollViewRef} onContentSizeChange={() => scrollViewRef.current?.scrollToEnd({animated:true})}>
             {initmessages.map((message) => (
-                <ChatAnimation key={message.id} text={message.text} style={message.isUser ? styles.userMessage : styles.otherMessage} />
+              <ChatAnimation
+                key={message.id}
+                text={message.text}
+                style={
+                  message.isUser ? styles.userMessage : styles.otherMessage
+                }
+              />
             ))}
-        </ScrollView>
+          </ScrollView>
         </View>
 
         <View style={styles.inputContainer}>
@@ -126,10 +140,9 @@ export default function ChatLayout() {
                 </TouchableOpacity>
             )}
         </View>
-
-        </View>
-        </KeyboardAvoidingView>
-    );
+      </View>
+    </KeyboardAvoidingView>
+  );
 }
 
 const styles = StyleSheet.create({

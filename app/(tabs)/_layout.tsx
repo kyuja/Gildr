@@ -42,7 +42,43 @@ export default function TabsLayout() {
       }} 
       
       />
+
+
+    // hidden screens 
+      <Tabs.Screen
+        name="listView"
+        options={{
+          href: null,          
+        }}
+        />
+
+       
+      <Tabs.Screen
+        name="details"
+        options={{
+          href: null,          
+        }}
+        />
+
+        <Tabs.Screen
+        name="chat"
+        options={{
+          href: null,          
+        }}
+        />
+
+        <Tabs.Screen
+        name="manageGuildMembers"
+        options={{
+          href: null,          
+        }}
+        />
+      
+  
+
     </Tabs>
+    
+    
   );
 }
 

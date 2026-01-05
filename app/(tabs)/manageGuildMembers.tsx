@@ -7,15 +7,17 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { BackAndSettingHeader } from "../components/BackAndSettingsHeader";
 
 const members = [
-    { id: 1, name: "Mitglied 1"},
-    { id: 2, name: "Mitglied 2"},
-    { id: 3, name: "Mitglied 3"},
-    { id: 4, name: "Mitglied 4"},
-    { id: 5, name: "Mitglied 5"},
-    { id: 6, name: "Mitglied 6"},
-]
+  { id: 1, name: "Mitglied 1" },
+  { id: 2, name: "Mitglied 2" },
+  { id: 3, name: "Mitglied 3" },
+  { id: 4, name: "Mitglied 4" },
+  { id: 5, name: "Mitglied 5" },
+  { id: 6, name: "Mitglied 6" },
+];
 
 export default function manageGuildMembers() {
+  const [memberList, setMemberList] = React.useState(members);
+  const [memberDeleteFlag, setMemberDeleteFlag] = React.useState<number[]>([]);
 
     const insets = useSafeAreaInsets();
     const [memberList, setMemberList] = React.useState(members)
@@ -34,10 +36,14 @@ export default function manageGuildMembers() {
         setMemberList(memberList.filter(member => !memberDeleteFlag.includes(member.id)))
         setMemberDeleteFlag([]);
     }
+  };
 
-    const isMarkedForDeletion = (id: number) => {
-        return memberDeleteFlag.includes(id);
-    }
+  const deleteMember = () => {
+    setMemberList(
+      memberList.filter((member) => !memberDeleteFlag.includes(member.id))
+    );
+    setMemberDeleteFlag([]);
+  };
 
     return (
     <KeyboardAvoidingView style={{flex :1}} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -47,12 +53,22 @@ export default function manageGuildMembers() {
 
         <BackAndSettingHeader useBack={false} backHref={"../chat"} useFallbackHref={"../home"} settingsHref={"/home"}/>
 
+  return (
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={-60}
+    >
+      <View style={styles.screenContainer}>
         <Pressable style={styles.header}>
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}>Beispiel Gildenname</Text>
+          <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+            Beispiel Gildenname
+          </Text>
         </Pressable>
 
-        <TextInput style={styles.inputBar} 
-                    placeholder="Beschreibung eingeben..." 
+        <TextInput
+          style={styles.inputBar}
+          placeholder="Beschreibung eingeben..."
         />
 
         <Text style={styles.membersBar}>Mitglieder</Text>
@@ -83,10 +99,10 @@ export default function manageGuildMembers() {
                 <Text style={{fontSize: 20, fontWeight: 'bold'}}>Bestätigen</Text>
             </TouchableOpacity>
         </View>
-        
-    </View>
+      </View>
     </KeyboardAvoidingView>
-)}
+  );
+}
 
 const styles = StyleSheet.create({
     header:{

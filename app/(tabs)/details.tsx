@@ -1,15 +1,14 @@
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import BackButton from "../components/BackButton";
 
 export default function BeitretenScreen() {
   return (
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={40} color="#fff" />
-        </TouchableOpacity>
+        <BackButton></BackButton>
 
         <TouchableOpacity>
           <Ionicons name="settings-outline" size={40} color="#fff" />
@@ -26,7 +25,7 @@ export default function BeitretenScreen() {
       {/* Join Button */}
       <TouchableOpacity
         style={styles.joinButton}
-        //onPress={() => router.push("/chat")}
+        onPress={() => router.push("/(tabs)/chat")}
       >
         <Text style={styles.joinText}>Beitreten</Text>
       </TouchableOpacity>
@@ -37,7 +36,7 @@ export default function BeitretenScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#300000",
+    backgroundColor: "#77363E",
     paddingTop: 60,
     paddingHorizontal: 30,
   },

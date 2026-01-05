@@ -57,7 +57,7 @@ export default function HomeScreen() {
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.card}
-            onPress={() => router.push("/(stacks)/details")}
+            onPress={() => router.push("/(tabs)/listView")}
           >
             <View style={styles.cardInner} />
             <Text style={styles.cardText}>{item.name}</Text>
@@ -71,7 +71,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#300000",
+    backgroundColor: "#77363E",
     paddingTop: 65,
     paddingHorizontal: 20,
   },
