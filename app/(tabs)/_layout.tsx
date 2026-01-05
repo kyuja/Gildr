@@ -22,7 +22,7 @@ export default function TabsLayout() {
           <Ionicons name="heart" color={color} size={size +5}></Ionicons>
         ),
 
-      }} 
+      }}  
       />
 
       <Tabs.Screen name="joinedGuilds" options={{
