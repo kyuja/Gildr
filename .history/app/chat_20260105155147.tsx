@@ -2,7 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Audio } from "expo-av";
 import { router } from "expo-router";
 import React from "react";
-import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { KeyboardAvoidingView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { ChatAnimation } from "../chatAnimation";
 import { BackAndSettingHeader } from "./components/BackAndSettingsHeader";
@@ -94,8 +94,6 @@ export default function ChatLayout() {
     }};
 
     return (
-        <KeyboardAvoidingView style={{flex :1}} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={0} 
         >
         <View style={styles.screenContainer}>
 

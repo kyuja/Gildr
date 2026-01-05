@@ -42,7 +42,7 @@ export default function ManageGuildMembers() {
     <KeyboardAvoidingView
       style={{ flex: 1 }}
       behavior={Platform.OS === "ios" ? "padding" : undefined}
-      keyboardVerticalOffset={insets.top -100}
+      keyboardVerticalOffset={insets.top -80}
     >
       <View style={styles.screenContainer}>
         <BackAndSettingHeader
@@ -64,7 +64,7 @@ export default function ManageGuildMembers() {
 
         <Text style={styles.membersBar}>Mitglieder</Text>
 
-        <View style={{ backgroundColor: "white", borderRadius: 10, padding: 10, marginTop: 10, flex:1}}>
+        <View style={{ backgroundColor: "white", borderRadius: 10, padding: 10, marginTop: 10, height:300}}>
           <ScrollView>
             {memberList.map((member) => (
               <View

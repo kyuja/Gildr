@@ -42,7 +42,7 @@ export default function ManageGuildMembers() {
     <KeyboardAvoidingView
       style={{ flex: 1 }}
       behavior={Platform.OS === "ios" ? "padding" : undefined}
-      keyboardVerticalOffset={insets.top -100}
+      keyboardVerticalOffset={insets.top -}
     >
       <View style={styles.screenContainer}>
         <BackAndSettingHeader
