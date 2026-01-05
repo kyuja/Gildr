@@ -123,7 +123,7 @@ export default function MeineGilden() {
       />
       {/* Floating Action Button – Gilde erstellen */}
       <Pressable
-        onPress={() => router.push("/gilde-erstellen")}
+        onPress={() => router.push("/(tabs)/gilde-erstellen")}
         style={({ pressed }) => [
         styles.fab,
         pressed && { opacity: 0.9 },

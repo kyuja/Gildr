@@ -1,10 +1,10 @@
 import { Ionicons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import React from "react";
 import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { BackAndSettingHeader } from "../components/BackAndSettingsHeader";
+import { BackAndSettingHeader } from "./components/BackAndSettingsHeader";
 
 const members = [
   { id: 1, name: "Mitglied 1" },
@@ -46,8 +46,7 @@ export default function ManageGuildMembers() {
     >
       <View style={styles.screenContainer}>
         <BackAndSettingHeader
-          useBack={false}
-          backHref={"../chat"}
+          useBack={true}
           useFallbackHref={"../home"}
           settingsHref={"/home"}
         />
@@ -100,11 +99,11 @@ export default function ManageGuildMembers() {
         </View>
 
         <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 20 }}>
-          <Link href="../chat" asChild>
-            <TouchableOpacity style={styles.saveButton}>
+            <TouchableOpacity style={styles.saveButton} onPress={() =>
+                                  router.back()
+                                }>
               <Text style={{ fontSize: 20, fontWeight: "bold" }}>Abbrechen</Text>
             </TouchableOpacity>
-          </Link>
 
           <TouchableOpacity style={styles.saveButton} onPress={deleteMember}>
             <Text style={{ fontSize: 20, fontWeight: "bold" }}>Bestätigen</Text>
@@ -137,7 +136,6 @@ const styles = StyleSheet.create({
     screenContainer: {
         flex: 1,
         paddingHorizontal: 10,
-        paddingBottom: 70,
         backgroundColor:'#77363E',
     },
     inputBar: {

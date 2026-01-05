@@ -114,7 +114,7 @@ export default function MeineGilden() {
             onToggle={() => toggleFavorite(item.id)}
             onPress={() =>
               router.push({
-                pathname: "/chat",
+                pathname: "/details",
                 params: { id: item.id },
               })
             }
@@ -123,7 +123,7 @@ export default function MeineGilden() {
       />
       {/* Floating Action Button – Gilde erstellen */}
       <Pressable
-        onPress={() => router.push("/gilde-erstellen")}
+        onPress={() => router.push("/(tabs)/gilde-erstellen")}
         style={({ pressed }) => [
         styles.fab,
         pressed && { opacity: 0.9 },

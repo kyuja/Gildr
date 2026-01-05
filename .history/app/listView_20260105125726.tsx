@@ -7,10 +7,10 @@ import {
   Pressable,
   StyleSheet,
   Text,
-  TouchableOpacity,
+  TextInput,
   View,
 } from "react-native";
-import BackButton from "../components/BackButton";
+import BackButton from "./components/BackButton";
 
 const DATA = [
   {
@@ -94,8 +94,7 @@ function GuildCard({
     </Pressable>
   );
 }
-
-export default function HomeScreen() {
+export default function listView() {
   const [favorites, setFavorites] = React.useState<Set<string>>(new Set());
 
   const toggleFavorite = (id: string) => {
@@ -105,22 +104,27 @@ export default function HomeScreen() {
       return next;
     });
   };
+
   return (
     <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <BackButton></BackButton>
-
-        <TouchableOpacity>
-          <Ionicons name="settings-outline" size={40} color="#fff" />
-        </TouchableOpacity>
+      <View style={styles.topRow}>
+        <BackButton />
+        <Ionicons name="settings-outline" size={40} color="#fff" />
       </View>
 
-      {/* Content */}
-      <View style={styles.content}>
-        <Text style={styles.title}>Beigetretene Gilden</Text>
+      <View style={styles.titlePill}>
+        <Text style={styles.title}>Neue Gilden entdecken</Text>
       </View>
 
+      <View style={{ height: 25 }} />
+      <View style={styles.searchRow}>
+        <View style={styles.searchBar}>
+          <Ionicons name="search" size={25} />
+          <TextInput placeholder="Namen Suchen..." style={styles.input} />
+        </View>
+      </View>
+
+      <View style={{ height: 32 }} />
       <FlatList
         data={DATA}
         keyExtractor={(item) => item.id}
@@ -134,7 +138,7 @@ export default function HomeScreen() {
             onToggle={() => toggleFavorite(item.id)}
             onPress={() =>
               router.push({
-                pathname: "/chat",
+                pathname: "/(tabs)/details",
                 params: { id: item.id },
               })
             }
@@ -150,36 +154,66 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#77363E",
     paddingTop: 60,
+    paddingHorizontal: 16,
+  },
+  topRow: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 16,
+    marginBottom: 16,
+  },
+  circleIcon: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: "#fff",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  titlePill: {
+    backgroundColor: "#fff",
+    borderRadius: 12,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    alignSelf: "center",
+    borderWidth: 2,
+    borderColor: "#000",
+    marginBottom: 14,
+  },
+  title: {
+    alignSelf: "center",
+    fontSize: 25,
+    fontWeight: "700",
+    fontFamily: "Inter-Bold",
+    color: "#000000ff",
+    marginBottom: 5,
+  },
+  searchRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
     paddingHorizontal: 30,
   },
-
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 20,
-  },
-
-  content: {
+  searchBar: {
     flex: 1,
-    marginBottom: 70,
-  },
-
-  title: {
     backgroundColor: "#fff",
-    textAlign: "center",
-    textAlignVertical: "center",
-    fontSize: 25,
-    borderRadius: 10,
-    height: 50,
-    fontWeight: "bold",
-    marginBottom: 20,
+    borderRadius: 12,
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 15,
+    paddingVertical: 14,
   },
-
+  input: {
+    marginLeft: 6,
+    flex: 1,
+    fontSize: 20,
+  },
   listContent: {
     paddingBottom: 120,
     gap: 14,
   },
-
   card: {
     backgroundColor: "#F6DDE0",
     borderRadius: 12,
