@@ -32,8 +32,9 @@ export default function LoginScreen() {
       <View style={{ height: 15 }} />  
 
       <InputField
-        style={{ height: 60, fontSize: 24, width: 304, backgroundColor:"#ffffffff"}}
+        style={{ height: 60, fontSize: 24, width: 304}}
         label=""
+        backgroundColor="#ffffffff"
         placeholder="Passwort"
         secureTextEntry
         value={pw}

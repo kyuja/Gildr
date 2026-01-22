@@ -26,6 +26,7 @@ export default function LoginScreen() {
         <InputField
               style={{ height: 60, fontSize: 24, width: 304, backgroundColor:"#ffffffff"}}
               label=""
+              backgroundColor="#ffffffff"
               placeholder="Name"
               autoCapitalize="none"
               value={name}
@@ -35,6 +36,7 @@ export default function LoginScreen() {
             <InputField
               style={{ height: 60, fontSize: 24, width: 304, backgroundColor:"#ffffffff"}}
               label=""
+              backgroundColor="#ffffffff"
               placeholder="Addresse"
               value={address}
               onChangeText={setAddress}
@@ -42,6 +44,7 @@ export default function LoginScreen() {
             <InputField
               style={{ height: 60, fontSize: 24, width: 304, backgroundColor:"#ffffffff"}}
               label=""
+              backgroundColor="#ffffffff"
               placeholder="E-Mail/Telefonnummer"
               keyboardType="email-address"
               autoCapitalize="none"
@@ -50,8 +53,9 @@ export default function LoginScreen() {
             />
       
             <InputField
-              style={{ height: 60, fontSize: 24, width: 304, backgroundColor:"#ffffffff"}}
+              style={{ height: 60, fontSize: 24, width: 304}}
               label=""
+              backgroundColor="#ffffffff"
               placeholder="Passwort"
               secureTextEntry
               value={pw}
