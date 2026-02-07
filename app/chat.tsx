@@ -99,7 +99,7 @@ export default function ChatLayout() {
         >
         <View style={styles.screenContainer}>
 
-        <BackAndSettingHeader useBack={true} useFallbackHref={"../home"} settingsHref={"/home"}/>
+        <BackAndSettingHeader useBack={true} useFallbackHref={"../home"} settingsHref={"/settings"}/>
   
         <TouchableOpacity style={styles.header} onPress={() =>
                       router.push({

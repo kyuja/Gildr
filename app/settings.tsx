@@ -6,7 +6,7 @@ import { BackAndSettingHeader } from "./components/BackAndSettingsHeader";
 export default function SettingsScreen() {
 
     const resetSettings = () => {
-        //
+
   };
 
     const onCancel = () => {
@@ -14,12 +14,10 @@ export default function SettingsScreen() {
   };
 
   const onConfirm = () => {
-    // hier würdest du später validieren / an Backend schicken
-    // jetzt: nur "Frontend" + reset
     resetSettings();
   };
     return (
-        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', backgroundColor: '#77363E', paddingTop: 150, width: '100%' }}>
+        <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', backgroundColor: '#77363E', width: '100%' }}>
             <BackAndSettingHeader useBack={true} settingsHref={"/settings"} useFallbackHref={"../settings"} />
             <View style={styles.card}>
                     <ScrollView
@@ -74,8 +72,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#77363E",
-        paddingTop: 70,
         paddingHorizontal: 20,
+        paddingTop: 10,
     },
     header: {
         flexDirection: "row",

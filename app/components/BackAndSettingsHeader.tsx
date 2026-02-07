@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Href, Link, router, useNavigation } from "expo-router";
+import { Href, router, useNavigation } from "expo-router";
 import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -9,15 +9,15 @@ type Props = {
     useFallbackHref?: Href;
     backHref?: Href;
     settingsHref?: Href;
-    onPressSettings?: () => void;
+    onPressSettings?: boolean;
 };
 
 export function BackAndSettingHeader({
     useBack = true,
     useFallbackHref = "/home",
     backHref,
-    settingsHref = "/home",
-    onPressSettings,
+    settingsHref = "/settings",
+    onPressSettings = true,
 }: Props ) {
     const insets = useSafeAreaInsets();
     const navigation = useNavigation();
@@ -28,7 +28,15 @@ export function BackAndSettingHeader({
             else router.replace(useFallbackHref);
             return;
         }
-        if (backHref) router.push(backHref);
+        if (backHref) router.push(backHref);    
+    };
+
+    const handleSettings = () => {
+        if (onPressSettings) {
+            router.push(settingsHref);
+        } else {
+            router.push(useFallbackHref);
+        }
     };
 
     return (
@@ -37,17 +45,9 @@ export function BackAndSettingHeader({
                     <Ionicons name="arrow-back" size={40} color="#fff" />
                 </TouchableOpacity>
             
-            {onPressSettings ? (
-                <TouchableOpacity onPress={onPressSettings} hitSlop={10}>
+                <TouchableOpacity onPress={handleSettings} hitSlop={10}>
                     <Ionicons name="settings-outline" size={40} color="#fff" />
                 </TouchableOpacity>
-            ) : (
-                <Link href={settingsHref} asChild>    
-                <TouchableOpacity hitSlop={10}>
-                    <Ionicons name="settings-outline" size={40} color="#fff" />
-                </TouchableOpacity>
-                </Link>
-            )}
         </View>
     )
 }
