@@ -97,7 +97,7 @@ export default function GildeErstellen() {
               setShowToast(true);
               setTimeout(() => {
                 setShowToast(false);
-                router.push("/guilds");
+                router.back();
               }, 1500);
             },
           },

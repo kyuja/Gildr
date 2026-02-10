@@ -1,8 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
 import { router } from "expo-router";
-import React from "react";
-import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import React, { useState } from "react";
+import { Alert, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { BackAndSettingHeader } from "./components/BackAndSettingsHeader";
 
@@ -37,6 +37,40 @@ export default function ManageGuildMembers() {
     );
     setMemberDeleteFlag([]);
   };
+
+   const [showToast, setShowToast] = useState(false);
+      
+    const handleDeletePress = () => {
+      if (memberDeleteFlag.length === 0) {
+      Alert.alert(
+      "Keine Auswahl",
+      "Bitte wählen Sie mindestens ein Mitglied aus."
+      );
+    return;
+  }
+      
+      Alert.alert(
+        "Mitglieder bearbeiten",
+        "Möchten Sie diese Mitglieder wirklich löschen?",
+        [
+          {
+              text: "Abbrechen",
+              style: "cancel",
+            },
+            {
+              text: "Bestätigen",
+              onPress: () => {
+                deleteMember();
+                setShowToast(true);
+                setTimeout(() =>{
+                  setShowToast(false);
+                  router.replace("/guilds");
+                }, 1500);
+              },
+            },
+          ]
+        );
+      };
 
   return (
     <KeyboardAvoidingView
@@ -97,17 +131,32 @@ export default function ManageGuildMembers() {
             ))}
           </ScrollView>
         </View>
+        <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 10 }}>
+        <TouchableOpacity
+        style={styles.manageButton}
+        onPress={() => router.push("/gilde-bearbeiten")}
+      >
+      <Text style={styles.manageButtonText}>
+        Mehr Optionen
+      </Text>
+      </TouchableOpacity>
+      </View>
 
         <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 20 }}>
             <TouchableOpacity style={styles.saveButton} onPress={() =>
                                   router.back()
                                 }>
-              <Text style={{ fontSize: 20, fontWeight: "bold" }}>Abbrechen</Text>
+              <Text style={{ fontSize: 20, fontWeight: "800" }}>Abbrechen</Text>
             </TouchableOpacity>
 
-          <TouchableOpacity style={styles.saveButton} onPress={deleteMember}>
-            <Text style={{ fontSize: 20, fontWeight: "bold" }}>Bestätigen</Text>
+          <TouchableOpacity style={styles.saveButton} onPress={handleDeletePress}>
+            <Text style={{ fontSize: 20, fontWeight: "800" }}>Bestätigen</Text>
           </TouchableOpacity>
+          {showToast && (
+      <View style={styles.toast}>
+    <Text style={styles.toastText}>Mitglieder wurden gelöscht</Text>
+      </View>
+         )}
         </View>
       </View>
     </KeyboardAvoidingView>
@@ -130,8 +179,10 @@ const styles = StyleSheet.create({
         borderRadius:10,
         paddingVertical:15,
         paddingHorizontal:38,
-        marginTop:10,
-        marginBottom:10,
+        marginTop:20,
+        marginBottom:50,
+        borderWidth: 1,
+  borderColor: "#070707",
     },
     screenContainer: {
         flex: 1,
@@ -162,5 +213,39 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
         alignItems:'center',
         marginBottom:10,
-    }
+    },
+    manageButton: {
+       width: "100%",
+  marginTop: 15,
+  backgroundColor: '#FFECED',
+  borderRadius: 10,
+  paddingVertical: 14,
+  alignItems: "center",
+  borderWidth: 1,
+  borderColor: "#070707",
+},
+
+manageButtonText: {
+  fontSize: 20,
+  fontWeight: "800",
+  color: "#000000",
+},
+     toast: {
+      position: "absolute",
+      bottom: 100,
+      left: 30,
+      right: 30,
+      backgroundColor: "#ffffff",
+      paddingVertical: 12,
+      paddingHorizontal: 20,
+      borderRadius: 20,
+      alignItems: "center",
+      opacity: 0.9,
+  },
+
+  toastText: {
+    color: "#000000",
+    fontSize: 20,
+    fontWeight: "600",
+},
 })
