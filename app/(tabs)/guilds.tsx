@@ -25,23 +25,32 @@ const DATA: Guild[] = [
     title: "Strickclub Bergedorf E.V.",
     place: "Landstraße 100",
     time: "Jeden Donnerstag - 18:00",
-    avatar:
-      "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/...", // optional: hier dein base64 wie im listView
+    avatar: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/...",
   },
-  { id: "2", title: "Generic Title", place: "—", time: "Weiter Infos", avatar: "" },
-  { id: "3", title: "Generic Title", place: "—", time: "Weiter Infos", avatar: "" },
+  {
+    id: "2",
+    title: "Generic Title",
+    place: "—",
+    time: "Weiter Infos",
+    avatar: "",
+  },
+  {
+    id: "3",
+    title: "Generic Title",
+    place: "—",
+    time: "Weiter Infos",
+    avatar: "",
+  },
 ];
 
 function GuildCard({
   item,
-  isFavorite,
-  onToggle,
   onPress,
+  onEdit,
 }: {
   item: Guild;
-  isFavorite: boolean;
-  onToggle: () => void;
   onPress: () => void;
+  onEdit: () => void;
 }) {
   return (
     <Pressable
@@ -59,18 +68,15 @@ function GuildCard({
           {item.title}
         </Text>
 
+        {/* ✏️ Stift-Icon → Gilde bearbeiten */}
         <Pressable
           onPress={(e) => {
             e.stopPropagation();
-            onToggle();
+            onEdit();
           }}
           hitSlop={10}
         >
-          <Ionicons
-            name={isFavorite ? "heart" : "heart-outline"}
-            size={26}
-            color={isFavorite ? "#C0001A" : "#333"}
-          />
+          <Ionicons name="create-outline" size={26} color="#333" />
         </Pressable>
       </View>
 
@@ -81,19 +87,8 @@ function GuildCard({
 }
 
 export default function MeineGilden() {
-  const [favorites, setFavorites] = React.useState<Set<string>>(new Set());
-
-  const toggleFavorite = (id: string) => {
-    setFavorites((prev) => {
-      const next = new Set(prev);
-      next.has(id) ? next.delete(id) : next.add(id);
-      return next;
-    });
-  };
-
   return (
     <View style={styles.container}>
-      {/* Header ist egal – kannst du lassen/ändern */}
       <View style={styles.topRow}>
         <BackButton />
         <Ionicons name="settings-outline" size={40} color="#fff" />
@@ -106,48 +101,37 @@ export default function MeineGilden() {
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.listContent}
         showsVerticalScrollIndicator={false}
-        extraData={favorites}
         renderItem={({ item }) => (
           <GuildCard
             item={item}
-            isFavorite={favorites.has(item.id)}
-            onToggle={() => toggleFavorite(item.id)}
             onPress={() =>
               router.push({
                 pathname: "/chat",
                 params: { id: item.id },
               })
             }
+            onEdit={() =>
+              router.push({
+                pathname: "/gilde-bearbeiten",
+                params: { id: item.id }, // optional & korrekt
+              })
+            }
           />
         )}
       />
-      {/* Floating Action Button – Gilde erstellen */}
+
+      {/* ➕ Floating Action Button – Gilde erstellen */}
       <Pressable
         onPress={() => router.push("/gilde-erstellen")}
-        style={({ pressed }) => [
-        styles.fab,
-        pressed && { opacity: 0.9 },
-      ]}
-    >
-      <Ionicons name="person-add-outline" size={28} color="#111" />
-      <Text style={styles.fabText}>Gilde{"\n"}erstellen</Text>
-    </Pressable>
-
+        style={({ pressed }) => [styles.fab, pressed && { opacity: 0.9 }]}
+      >
+        <Ionicons name="person-add-outline" size={28} color="#111" />
+        <Text style={styles.fabText}>Gilde{"\n"}erstellen</Text>
+      </Pressable>
     </View>
   );
-  
 }
 
-/**
- * ✅ Styles sind 1:1 aus deinem listView übernommen:
- * - card
- * - cardTop
- * - avatar / avatarPlaceholder
- * - cardTitle
- * - cardInfo
- * - listContent
- * - container/topRow/headerTitle nur basic drumherum
- */
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -177,7 +161,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
 
-  // ---- 1:1 listView ----
   listContent: {
     paddingBottom: 120,
     gap: 14,
@@ -227,34 +210,30 @@ const styles = StyleSheet.create({
   },
 
   fab: {
-  position: "absolute",
-  right: 18,
-  bottom: 110, // über der Tabbar
-  width: 112,
-  height: 112,
-  borderRadius: 999,
-  backgroundColor: "#F6DDE0",
-  borderWidth: 2,
-  borderColor: "#111",
-  justifyContent: "center",
-  alignItems: "center",
-  shadowColor: "#000",
-  shadowOpacity: 0.3,
-  shadowRadius: 10,
-  shadowOffset: { width: 0, height: 5 },
-  elevation: 6,
-  gap: 6,
-},
+    position: "absolute",
+    right: 18,
+    bottom: 110,
+    width: 112,
+    height: 112,
+    borderRadius: 999,
+    backgroundColor: "#F6DDE0",
+    borderWidth: 2,
+    borderColor: "#111",
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 5 },
+    elevation: 6,
+    gap: 6,
+  },
 
-fabText: {
-  textAlign: "center",
-  fontSize: 14,
-  fontWeight: "700",
-  color: "#111",
-  lineHeight: 16,
-},
-
-
-
-
+  fabText: {
+    textAlign: "center",
+    fontSize: 14,
+    fontWeight: "700",
+    color: "#111",
+    lineHeight: 16,
+  },
 });
