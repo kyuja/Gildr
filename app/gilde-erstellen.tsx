@@ -1,5 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
+import { router } from "expo-router";
 import { useState } from "react";
 import {
   Alert,
@@ -79,11 +80,30 @@ export default function GildeErstellen() {
     resetForm();
   };
 
-  const onConfirm = () => {
-    // hier würdest du später validieren / an Backend schicken
-    // jetzt: nur "Frontend" + reset
-    resetForm();
-  };
+  const [showToast, setShowToast] = useState(false);
+    
+     const handleJoinPress = () => {
+      Alert.alert(
+        "Gilde erstellen",
+        "Möchten Sie diese Gilde wirklich erstellen?",
+        [
+          {
+            text: "Abbrechen",
+            style: "cancel",
+          },
+          {
+            text: "Bestätigen",
+            onPress: () => {
+              setShowToast(true);
+              setTimeout(() => {
+                setShowToast(false);
+                router.push("/guilds");
+              }, 1500);
+            },
+          },
+        ]
+      );
+    };
 
   return (
     <View style={styles.container}>
@@ -197,7 +217,6 @@ export default function GildeErstellen() {
             </View>
           )}
 
-          {/* -------- Actions (Hover + Pressed Farbwechsel) -------- */}
           <View style={styles.actions}>
             <Pressable
               onPress={onCancel}
@@ -211,7 +230,7 @@ export default function GildeErstellen() {
             </Pressable>
 
             <Pressable
-              onPress={onConfirm}
+              onPress={handleJoinPress}
               style={({ pressed, hovered }) => [
                 styles.btn,
                 styles.btnOk,
@@ -223,6 +242,13 @@ export default function GildeErstellen() {
           </View>
         </ScrollView>
       </View>
+      {showToast && (
+            <View style={styles.toast}>
+            <Text style={styles.toastText}>
+              Eine neue Gilde wurde erstellt!
+            </Text>
+            </View>
+      )}
     </View>
   );
 }
@@ -252,15 +278,15 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 
-  card: { flex: 1, backgroundColor: "#fff", borderRadius: 28, padding: 18 },
-  form: { gap: 10, paddingBottom: 20 },
+  card: { backgroundColor: "#fff", borderRadius: 28, padding: 18, marginBottom: 50 },
+  form: { gap: 10, paddingBottom: 10 },
 
   input: {
     backgroundColor: "#dedede",
     borderRadius: 10,
     paddingHorizontal: 10,
     paddingVertical: 10,
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "600",
     color: "#444",
   },
@@ -273,7 +299,7 @@ const styles = StyleSheet.create({
     gap: 12,
     marginTop: 4,
   },
-  uploadLabel: { fontSize: 16, fontWeight: "700", color: "#444" },
+  uploadLabel: { fontSize: 20, fontWeight: "700", color: "#444" },
   uploadBox: {
     flex: 1,
     backgroundColor: "#dedede",
@@ -304,8 +330,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffd6d6", // Hover/Pressed Farbe
     transform: [{ scale: 0.99 }],
   },
-  btnCancelText: { color: "#b00020", fontSize: 15, fontWeight: "700" },
-  btnOkText: { color: "#b00020", fontSize: 15, fontWeight: "700" },
+  btnCancelText: { color: "#b00020", fontSize: 20, fontWeight: "700" },
+  btnOkText: { color: "#b00020", fontSize: 20, fontWeight: "700" },
 
   previewRow: {
     flexDirection: "row",
@@ -350,5 +376,25 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     fontSize: 13,
   },
+  toast: {
+  position: "absolute",
+  bottom: 140,
+  left: 30,
+  right: 30,
+  backgroundColor: "#ffffff",
+  paddingVertical: 12,
+  paddingHorizontal: 20,
+  borderRadius: 20,
+  alignItems: "center",
+  opacity: 0.9,
+  borderColor: "#631826",
+  borderWidth: 2,
+},
+
+toastText: {
+  color: "#000000",
+  fontSize: 20,
+  fontWeight: "600",
+},
 });
 
