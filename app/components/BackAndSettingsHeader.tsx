@@ -23,12 +23,18 @@ export function BackAndSettingHeader({
     const navigation = useNavigation();
 
     const handleBack = () => {
-        if (useBack){
-            if (navigation.canGoBack()) router.back();
-            else router.replace(useFallbackHref);
+          if (backHref) {
+            router.replace(backHref);
             return;
         }
-        if (backHref) router.push(backHref);    
+        
+        if (useBack){
+            if (navigation.canGoBack()) {
+                router.back();
+            } else {
+                router.replace(useFallbackHref);
+            }
+        }    
     };
 
     const handleSettings = () => {

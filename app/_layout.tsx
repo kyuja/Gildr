@@ -6,14 +6,15 @@ export default function RootLayout() {
 
       <Stack.Screen name="index" />
       <Stack.Screen name="(auth)" />
-      <Stack.Screen name="(tabs)" />
+      <Stack.Screen name="(tabs)"/>
+      <Stack.Screen name="guils"/>
 
       <Stack.Screen name="listView" />
       <Stack.Screen name="details" />
       <Stack.Screen name="chat" />
       <Stack.Screen name="manageGuildMembers" />
       <Stack.Screen name="gilde-erstellen" />
-      <Stack.Screen name="gilde-bearbeiten" />
+      <Stack.Screen name="gilde-bearbeiten"/>
 
       <Stack.Screen name="login" />
       <Stack.Screen name="register" />
