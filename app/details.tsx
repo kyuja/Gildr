@@ -1,12 +1,37 @@
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useState } from "react";
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import BackButton from "./components/BackButton";
 
 export default function BeitretenScreen() {
+   const [showToast, setShowToast] = useState(false);
+  
+   const handleJoinPress = () => {
+    Alert.alert(
+      "Gilde beitreten",
+      "Möchten Sie dieser Gilde wirklich beitreten?",
+      [
+        {
+          text: "Abbrechen",
+          style: "cancel",
+        },
+        {
+          text: "Bestätigen",
+          onPress: () => {
+            setShowToast(true);
+
+            setTimeout(() => {
+              setShowToast(false);
+              router.push("/chat");
+            }, 1500);
+          },
+        },
+      ]
+    );
+  };
   return (
     <View style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <BackButton></BackButton>
 
@@ -15,20 +40,27 @@ export default function BeitretenScreen() {
         </TouchableOpacity>
       </View>
 
-      {/* Content */}
       <View style={styles.content}>
         <Text style={styles.title}>Generic Title</Text>
 
         <Text style={styles.description}>Beschreibung ...</Text>
       </View>
 
-      {/* Join Button */}
       <TouchableOpacity
         style={styles.joinButton}
-        onPress={() => router.push("/chat")}
+        onPress={handleJoinPress}
       >
         <Text style={styles.joinText}>Beitreten</Text>
       </TouchableOpacity>
+
+      {showToast && (
+      <View style={styles.toast}>
+      <Text style={styles.toastText}>
+        Sie sind jetzt Mitglied der Gilde
+      </Text>
+      </View>
+)}
+
     </View>
   );
 }
@@ -82,4 +114,22 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 20,
   },
+  toast: {
+  position: "absolute",
+  bottom: 100,
+  left: 30,
+  right: 30,
+  backgroundColor: "#ffffff",
+  paddingVertical: 12,
+  paddingHorizontal: 20,
+  borderRadius: 20,
+  alignItems: "center",
+  opacity: 0.9,
+},
+
+toastText: {
+  color: "#000000",
+  fontSize: 20,
+  fontWeight: "600",
+},
 });
