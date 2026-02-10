@@ -1,5 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
+import { router } from "expo-router";
 import { useState } from "react";
 import {
   Alert,
@@ -14,6 +15,8 @@ import {
 import BackButton from "./components/BackButton";
 
 export default function GildeBearbeiten() {
+
+  const [showToast, setShowToast] = useState(false);
   // ------------- Form States -------------
   const [name, setName] = useState("");
   const [kategorie, setKategorie] = useState("");
@@ -79,11 +82,31 @@ export default function GildeBearbeiten() {
     resetForm();
   };
 
-  const onConfirm = () => {
-    // hier würdest du später validieren / an Backend schicken
-    // jetzt: nur "Frontend" + reset
-    resetForm();
-  };
+      
+       const handleConfirmPress = () => {
+        Alert.alert(
+          "Gilde bearbeiten",
+          "Möchten Sie diese Änderungen übernehmen?",
+          [
+            {
+              text: "Abbrechen",
+              style: "cancel",
+            },
+            {
+              text: "Bestätigen",
+              onPress: () => {
+                setShowToast(true);
+    
+                setTimeout(() => {
+                  setShowToast(false);
+                  router.back();
+                }, 1500);
+              },
+            },
+          ]
+        );
+      };
+
 
   return (
     <View style={styles.container}>
@@ -211,7 +234,7 @@ export default function GildeBearbeiten() {
             </Pressable>
 
             <Pressable
-              onPress={onConfirm}
+              onPress={handleConfirmPress}
               style={({ pressed, hovered }) => [
                 styles.btn,
                 styles.btnOk,
@@ -220,12 +243,19 @@ export default function GildeBearbeiten() {
             >
               <Text style={styles.btnOkText}>Bestätigen</Text>
             </Pressable>
+
+            {showToast && (
+        <View style={styles.toast}>
+        <Text style={styles.toastText}>Änderungen gespeichert</Text>
+  </View>
+)}
           </View>
         </ScrollView>
       </View>
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -252,7 +282,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 
-  card: { flex: 1, backgroundColor: "#fff", borderRadius: 28, padding: 18 },
+  card: { backgroundColor: "#fff", borderRadius: 28, padding: 18, marginBottom: 30, maxHeight: "75%",  },
   form: { gap: 10, paddingBottom: 20 },
 
   input: {
@@ -260,7 +290,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 10,
     paddingVertical: 10,
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "600",
     color: "#444",
   },
@@ -273,7 +303,7 @@ const styles = StyleSheet.create({
     gap: 12,
     marginTop: 4,
   },
-  uploadLabel: { fontSize: 16, fontWeight: "700", color: "#444" },
+  uploadLabel: { fontSize: 20, fontWeight: "700", color: "#444" },
   uploadBox: {
     flex: 1,
     backgroundColor: "#dedede",
@@ -283,9 +313,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   uploadBoxHover: {
-    backgroundColor: "#cfcfcf", // kurzer Farbwechsel bei Hover/Press
+    backgroundColor: "#cfcfcf",
   },
-  uploadIcon: { fontSize: 22, fontWeight: "700", color: "#444" },
+  uploadIcon: { fontSize: 22, fontWeight: "800", color: "#444" },
 
   actions: { flexDirection: "row", gap: 12, marginTop: 14 },
   btn: {
@@ -304,8 +334,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffd6d6", // Hover/Pressed Farbe
     transform: [{ scale: 0.99 }],
   },
-  btnCancelText: { color: "#b00020", fontSize: 15, fontWeight: "700" },
-  btnOkText: { color: "#b00020", fontSize: 15, fontWeight: "700" },
+  btnCancelText: { color: "#b00020", fontSize: 20, fontWeight: "800" },
+  btnOkText: { color: "#b00020", fontSize: 20, fontWeight: "800" },
 
   previewRow: {
     flexDirection: "row",
@@ -350,4 +380,24 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     fontSize: 13,
   },
+  toast: {
+  position: "absolute",
+  bottom: 100,
+  left: 30,
+  right: 30,
+  backgroundColor: "#ffffff",
+  paddingVertical: 12,
+  paddingHorizontal: 20,
+  borderRadius: 20,
+  alignItems: "center",
+  borderColor: "#000000",
+  borderWidth: 1,
+  opacity: 0.9,
+},
+
+toastText: {
+  color: "#000000",
+  fontSize: 20,
+  fontWeight: "600",
+},
 });
