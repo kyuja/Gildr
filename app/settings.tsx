@@ -49,7 +49,7 @@ const DEFAULT_SETTINGS: Settings = {
 
 function fontScale(mode: FontSizeMode) {
   if (mode === "small") return 0.92;
-  if (mode === "large") return 1.12;
+  if (mode === "large") return 1.10;
   return 1.0;
 }
 
@@ -444,7 +444,7 @@ export default function SettingsScreen() {
           {/* Actions */}
           <View style={styles.actions}>
             <Pressable
-              onPress={onCancel}
+              onPress={() => router.back()}
               style={({ pressed, hovered }) => [
                 styles.btn,
                 styles.btnCancel,

@@ -98,9 +98,9 @@ export default function ChatLayout() {
         keyboardVerticalOffset={0} 
         >
         <View style={styles.screenContainer}>
-
+        <View style={{ paddingHorizontal:10 }}>
         <BackAndSettingHeader useBack={false} backHref={"/joinedGuilds"} useFallbackHref={"../home"} settingsHref={"/settings"}/>
-  
+        </View>
         <TouchableOpacity style={styles.header} onPress={() =>
                       router.push({
                         pathname: "/manageGuildMembers",

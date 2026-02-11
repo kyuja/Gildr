@@ -1,8 +1,7 @@
-import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { useState } from "react";
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import BackButton from "../components/BackButton";
+import { BackAndSettingHeader } from "../components/BackAndSettingsHeader";
 
 export default function BeitretenScreen() {
    const [showToast, setShowToast] = useState(false);
@@ -32,13 +31,7 @@ export default function BeitretenScreen() {
   };
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <BackButton></BackButton>
-
-        <TouchableOpacity>
-          <Ionicons name="settings-outline" size={40} color="#fff" />
-        </TouchableOpacity>
-      </View>
+       <BackAndSettingHeader useBack={true} useFallbackHref={"../home"} settingsHref={"/settings"}/>
 
       <View style={styles.content}>
         <Text style={styles.title}>Generic Title</Text>
@@ -69,8 +62,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#77363E",
-    paddingTop: 60,
-    paddingHorizontal: 30,
+    paddingHorizontal: 20,
   },
 
   header: {

@@ -79,12 +79,13 @@ export default function ManageGuildMembers() {
       keyboardVerticalOffset={insets.top -100}
     >
       <View style={styles.screenContainer}>
+        <View style={{ paddingHorizontal:10 }}>
         <BackAndSettingHeader
           useBack={true}
           useFallbackHref={"../home"}
-          settingsHref={"/home"}
+          settingsHref={"/settings"}
         />
-
+        </View>
         <Pressable style={styles.header}>
           <Text style={{ fontSize: 20, fontWeight: "bold" }}>
             Beispiel Gildenname

@@ -1,4 +1,3 @@
-import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { router } from "expo-router";
 import { useState } from "react";
@@ -12,7 +11,7 @@ import {
   TextInput,
   View,
 } from "react-native";
-import BackButton from "./components/BackButton";
+import { BackAndSettingHeader } from "./components/BackAndSettingsHeader";
 
 export default function GildeErstellen() {
   // ------------- Form States -------------
@@ -107,10 +106,7 @@ export default function GildeErstellen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <BackButton />
-        <Ionicons name="settings-outline" size={40} color="#fff" />
-      </View>
+       <BackAndSettingHeader useBack={true} useFallbackHref={"../home"} settingsHref={"/settings"}/>
 
       <Text style={styles.headerTitle}>Gilde erstellen</Text>
 
@@ -257,7 +253,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#77363E",
-    paddingTop: 60,
     paddingHorizontal: 30,
   },
 

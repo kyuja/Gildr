@@ -45,10 +45,10 @@ export default function HomeScreen() {
                 >
             <View style={styles.screenContainer}>
     
-                <BackAndSettingHeader useBack={true} useFallbackHref={"../home"} settingsHref={"/home"}/>
+                <BackAndSettingHeader useBack={true} useFallbackHref={"../home"} settingsHref={"/settings"}/>
      
             <Pressable style={styles.header}>
-                <Text style={{fontSize: 20, fontWeight: 'bold'}}>Favoriten</Text>
+                <Text style={{fontSize: 23, fontWeight: 800}}>Favoriten</Text>
             </Pressable> 
             <FlatList
                     data={data}
@@ -93,13 +93,13 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'center',
         alignItems:'center',
-        paddingVertical:15,
+        paddingVertical:10,
         marginTop:10,
         marginBottom:10,
     },
     screenContainer: {
         flex: 1,
-        paddingHorizontal: 10,
+        paddingHorizontal: 20,
         paddingBottom: 5,
         backgroundColor:'#77363E',
     },
