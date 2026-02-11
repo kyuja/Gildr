@@ -198,6 +198,7 @@ React.useEffect(() => {
         ],
       },
     ]}
+    
   >
     <Text style={styles.toastText}>{toastMsg}</Text>
   </Animated.View>
