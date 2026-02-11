@@ -389,9 +389,7 @@ export default function SettingsScreen() {
           <Row
             icon="help-circle-outline"
             title={draft.language === "de" ? "Hilfe" : "Help"}
-            subtitle={
-              draft.language === "de" ? "FAQ & Support" : "FAQ & support"
-            }
+            subtitle={draft.language === "de" ? "Anleitung" : "Instructions"}
             right={
               <Pressable
                 onPress={() => router.push("/hilfe")}
