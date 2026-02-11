@@ -9,7 +9,7 @@ import {
   Text,
   View,
 } from "react-native";
-import BackButton from "../components/BackButton";
+import { BackAndSettingHeader } from "../components/BackAndSettingsHeader";
 
 type Guild = {
   id: string;
@@ -92,10 +92,7 @@ function GuildCard({
 export default function MeineGilden() {
   return (
     <View style={styles.container}>
-      <View style={styles.topRow}>
-        <BackButton />
-        <Ionicons name="settings-outline" size={40} color="#fff" />
-      </View>
+           <BackAndSettingHeader useBack={true} useFallbackHref={"../home"} settingsHref={"/settings"}/>
 
       <Text style={styles.headerTitle}>Meine Gilden</Text>
 
@@ -138,18 +135,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#77363E",
-    paddingTop: 60,
+
     paddingHorizontal: 16,
   },
 
-  topRow: {
-    width: "100%",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: 16,
-    marginBottom: 16,
-  },
 
   headerTitle: {
     backgroundColor: "#fff",

@@ -14,7 +14,7 @@ type Props = {
 
 export function BackAndSettingHeader({
     useBack = true,
-    useFallbackHref = "/home",
+    useFallbackHref = "/(tabs)/home",
     backHref,
     settingsHref = "/settings",
     onPressSettings = true,
@@ -23,19 +23,15 @@ export function BackAndSettingHeader({
     const navigation = useNavigation();
 
     const handleBack = () => {
-          if (backHref) {
-            router.replace(backHref);
+        if (!useBack) {
+            router.push(backHref ?? useFallbackHref);
+            return;
+        }else if (navigation.canGoBack()) {
+            router.back();
             return;
         }
-        
-        if (useBack){
-            if (navigation.canGoBack()) {
-                router.back();
-            } else {
-                router.replace(useFallbackHref);
-            }
-        }    
-    };
+  router.replace(backHref ?? useFallbackHref);
+};
 
     const handleSettings = () => {
         if (onPressSettings) {

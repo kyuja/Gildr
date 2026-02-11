@@ -103,7 +103,6 @@ export default function HomeScreen() {
           <Ionicons name="search" size={25} color="#111" />
           <TextInput placeholder="Kategorie suchen..." style={styles.input} />
         </View>
-
         <TouchableOpacity
           onPress={() => router.push("/settings")}
           activeOpacity={0.7}

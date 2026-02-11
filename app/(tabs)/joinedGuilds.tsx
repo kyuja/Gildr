@@ -9,10 +9,9 @@ import {
   Pressable,
   StyleSheet,
   Text,
-  TouchableOpacity,
-  View,
+  View
 } from "react-native";
-import BackButton from "../components/BackButton";
+import { BackAndSettingHeader } from "../components/BackAndSettingsHeader";
 
 const DATA = [
   {
@@ -70,7 +69,7 @@ function GuildCard({
 
           <Pressable
             onPress={(e) => {
-              e.stopPropagation(); // 🔑 DAS ist wichtig
+              e.stopPropagation();
               onToggle();
             }}
             hitSlop={10}
@@ -145,17 +144,11 @@ export default function HomeScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <BackButton></BackButton>
-
-        <TouchableOpacity>
-          <Ionicons name="settings-outline" size={40} color="#fff" />
-        </TouchableOpacity>
+      <View style={styles.container}>
+      <View style={{ paddingHorizontal:20 }}>
+      <BackAndSettingHeader useBack={true} useFallbackHref={"../home"} settingsHref={"/settings"}/>
       </View>
-
-      {/* Content */}
+      <View style={styles.container}>
       <View style={styles.content}>
         <Text style={styles.title}>Beigetretene Gilden</Text>
       </View>
@@ -202,6 +195,7 @@ export default function HomeScreen() {
   </Animated.View>
 )}
     </View>
+    </View>
   );
 }
 
@@ -209,19 +203,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#77363E",
-    paddingTop: 60,
-    paddingHorizontal: 30,
   },
 
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 20,
-  },
+  
 
   content: {
+    paddingHorizontal: 20,
+    textAlign: "center",
+    justifyContent: "center",
     flex: 1,
-    marginBottom: 70,
+    marginBottom: 40,
+    paddingTop: 30,
+    
   },
 
   title: {
@@ -232,12 +225,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     height: 50,
     fontWeight: "bold",
-    marginBottom: 20,
+    marginBottom: 15,
   },
 
   listContent: {
-    paddingBottom: 120,
-    gap: 14,
+    paddingHorizontal: 20,
+    paddingBottom: 140,
+    gap: 20,
   },
 
   card: {
@@ -267,7 +261,7 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     flex: 1,
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "700",
     color: "#111",
   },
