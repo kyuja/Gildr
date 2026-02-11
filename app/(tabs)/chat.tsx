@@ -1,11 +1,11 @@
+import { ChatAnimation } from "@/chatAnimation";
 import { Ionicons } from "@expo/vector-icons";
 import { Audio } from "expo-av";
 import { router } from "expo-router";
 import React from "react";
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { ChatAnimation } from "../chatAnimation";
-import { BackAndSettingHeader } from "./components/BackAndSettingsHeader";
+import { BackAndSettingHeader } from "../components/BackAndSettingsHeader";
 
 
 const messages = [
@@ -34,7 +34,7 @@ export default function ChatLayout() {
         let mounted = true;
         (async () => {
             const { sound } = await Audio.Sound.createAsync(
-            require("../assets/sounds/chat_send_sound.mp3"),
+            require("../../assets/sounds/chat_send_sound.mp3"),
             {shouldPlay: false}
             );
             if (mounted) sendSoundRef.current = sound

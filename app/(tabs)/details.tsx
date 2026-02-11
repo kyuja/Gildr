@@ -2,7 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { useState } from "react";
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import BackButton from "./components/BackButton";
+import BackButton from "../components/BackButton";
 
 export default function BeitretenScreen() {
    const [showToast, setShowToast] = useState(false);
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
   bottom: 100,
   left: 30,
   right: 30,
-  backgroundColor: "#ffffff",
+  backgroundColor: "rgb(32, 4, 4)",
   paddingVertical: 12,
   paddingHorizontal: 20,
   borderRadius: 20,
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
 },
 
 toastText: {
-  color: "#000000",
+  color: "#ffffff",
   fontSize: 20,
   fontWeight: "600",
 },

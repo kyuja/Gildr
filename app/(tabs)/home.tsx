@@ -98,14 +98,12 @@ const categories: Category[] = [
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      {/* 🔍 Suche + ⚙️ Einstellungen */}
       <View style={styles.searchRow}>
         <View style={styles.searchBar}>
           <Ionicons name="search" size={25} color="#111" />
           <TextInput placeholder="Kategorie suchen..." style={styles.input} />
         </View>
 
-        {/* ⚙️ Zahnrad → /settings */}
         <TouchableOpacity
           onPress={() => router.push("/settings")}
           activeOpacity={0.7}
@@ -119,7 +117,6 @@ export default function HomeScreen() {
         <Text style={styles.title}>Neue Gilden entdecken</Text>
       </View>
 
-      {/* 📦 Kategorien */}
       <FlatList
         data={categories}
         numColumns={3}
@@ -207,7 +204,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     paddingBottom: 8,
 
-    // ✅ RN-kompatibler Schatten (kein boxShadow-String)
     shadowColor: "#000",
     shadowOpacity: 0.25,
     shadowRadius: 4,
