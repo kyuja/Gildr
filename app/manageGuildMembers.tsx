@@ -232,10 +232,10 @@ manageButtonText: {
 },
      toast: {
       position: "absolute",
-      bottom: 100,
+      bottom: 240,
       left: 30,
       right: 30,
-      backgroundColor: "#ffffff",
+      backgroundColor: "rgb(26, 2, 2)",
       paddingVertical: 12,
       paddingHorizontal: 20,
       borderRadius: 20,
@@ -244,7 +244,7 @@ manageButtonText: {
   },
 
   toastText: {
-    color: "#000000",
+    color: "#ffffff",
     fontSize: 20,
     fontWeight: "600",
 },

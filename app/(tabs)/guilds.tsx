@@ -68,13 +68,16 @@ function GuildCard({
           {item.title}
         </Text>
 
-        {/* ✏️ Stift-Icon → Gilde bearbeiten */}
         <Pressable
           onPress={(e) => {
             e.stopPropagation();
             onEdit();
           }}
-          hitSlop={10}
+          style={({ pressed }) => [
+            styles.editBtn,
+            pressed && { opacity: 0.7 },
+       ]}
+          hitSlop={8} 
         >
           <Ionicons name="create-outline" size={26} color="#333" />
         </Pressable>
@@ -113,14 +116,13 @@ export default function MeineGilden() {
             onEdit={() =>
               router.push({
                 pathname: "/gilde-bearbeiten",
-                params: { id: item.id }, // optional & korrekt
+                params: { id: item.id },
               })
             }
           />
         )}
       />
 
-      {/* ➕ Floating Action Button – Gilde erstellen */}
       <Pressable
         onPress={() => router.push("/gilde-erstellen")}
         style={({ pressed }) => [styles.fab, pressed && { opacity: 0.9 }]}
@@ -212,7 +214,7 @@ const styles = StyleSheet.create({
   fab: {
     position: "absolute",
     right: 18,
-    bottom: 110,
+    bottom: 60,
     width: 112,
     height: 112,
     borderRadius: 999,
@@ -236,4 +238,9 @@ const styles = StyleSheet.create({
     color: "#111",
     lineHeight: 16,
   },
+  editBtn: {
+  padding: 20,        
+  borderRadius: 900,
+  backgroundColor: "rgba(231, 168, 168, 0.73)",
+},
 });

@@ -47,7 +47,31 @@ export default function TabsLayout() {
           ),
         }}
       />
+    <Tabs.Screen
+    name="listView"
+  options={{
+    href: null
+  }}
+    />
+    <Tabs.Screen
+    name="details"
+  options={{
+    href: null
+  }}
+    />
+    <Tabs.Screen
+    name="chat"
+  options={{
+    href: null
+  }}
+    />
+    <Tabs.Screen
+    name="settings"
+  options={{
+    href: null
+  }}
+    />
     </Tabs>
-    
   );
 }
+

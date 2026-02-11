@@ -2,6 +2,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import React from "react";
 import {
+  Animated,
+  Easing,
   FlatList,
   Image,
   Pressable,
@@ -37,13 +39,6 @@ const DATA = [
   },
 ];
 
-const toggleFavorite = (id: string) => {
-  setFavorites((prev) => {
-    const next = new Set(prev);
-    next.has(id) ? next.delete(id) : next.add(id);
-    return next;
-  });
-};
 
 function GuildCard({
   item,
@@ -96,15 +91,59 @@ function GuildCard({
 }
 
 export default function HomeScreen() {
-  const [favorites, setFavorites] = React.useState<Set<string>>(new Set());
-
-  const toggleFavorite = (id: string) => {
+   const [favorites, setFavorites] = React.useState<Set<string>>(new Set());
+  
+  const [toastMsg, setToastMsg] = React.useState<string | null>(null);
+  const toastAnim = React.useRef(new Animated.Value(0)).current;
+  const toastTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  
+  const showToast = (msg: string) => {
+    setToastMsg(msg);
+  
+    if (toastTimer.current) clearTimeout(toastTimer.current);
+  
+    Animated.timing(toastAnim, {
+      toValue: 1,
+      duration: 180,
+      easing: Easing.out(Easing.quad),
+      useNativeDriver: true,
+    }).start();
+  
+    toastTimer.current = setTimeout(() => {
+      Animated.timing(toastAnim, {
+        toValue: 0,
+        duration: 180,
+        easing: Easing.in(Easing.quad),
+        useNativeDriver: true,
+      }).start(({ finished }) => {
+        if (finished) setToastMsg(null);
+      });
+    }, 2000);
+  };
+  
+  React.useEffect(() => {
+    return () => {
+      if (toastTimer.current) clearTimeout(toastTimer.current);
+    };
+  }, []);
+    
+    
+    const toggleFavorite = (id: string, title: string) => {
+    const wasFavorite = favorites.has(id);
+  
     setFavorites((prev) => {
       const next = new Set(prev);
-      next.has(id) ? next.delete(id) : next.add(id);
+      wasFavorite ? next.delete(id) : next.add(id);
       return next;
     });
+  
+    showToast(
+      wasFavorite
+        ? "Gilde wurde aus Favoriten entfernt"
+        : "Gilde wurde zu Favoriten hinzugefügt"
+    );
   };
+
   return (
     <View style={styles.container}>
       {/* Header */}
@@ -131,7 +170,7 @@ export default function HomeScreen() {
           <GuildCard
             item={item}
             isFavorite={favorites.has(item.id)}
-            onToggle={() => toggleFavorite(item.id)}
+            onToggle={() => toggleFavorite(item.id, item.title)}
             onPress={() =>
               router.push({
                 pathname: "/chat",
@@ -141,6 +180,27 @@ export default function HomeScreen() {
           />
         )}
       />
+      {toastMsg && (
+  <Animated.View
+    pointerEvents="none"
+    style={[
+      styles.toast,
+      {
+        opacity: toastAnim,
+        transform: [
+          {
+            translateY: toastAnim.interpolate({
+              inputRange: [0, 1],
+              outputRange: [12, 0],
+            }),
+          },
+        ],
+      },
+    ]}
+  >
+    <Text style={styles.toastText}>{toastMsg}</Text>
+  </Animated.View>
+)}
     </View>
   );
 }
@@ -217,8 +277,21 @@ const styles = StyleSheet.create({
     marginTop: 2,
     fontWeight: "600",
   },
+  toast: {
+  position: "absolute",
+  left: 16,
+  right: 16,
+  bottom: 24,
+  backgroundColor: "rgb(41, 9, 9)",
+  paddingVertical: 12,
+  paddingHorizontal: 14,
+  borderRadius: 12,
+},
+toastText: {
+  color: "#fff",
+  fontSize: 18,
+  fontWeight: "700",
+  textAlign: "center",
+},
 });
 
-function setFavorites(arg0: (prev: any) => Set<unknown>) {
-  throw new Error("Function not implemented.");
-}

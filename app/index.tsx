@@ -2,7 +2,6 @@ import { Link } from 'expo-router';
 import { View } from 'react-native';
 import Button from './components/Button';
 import GildrLogo from './components/GildrLogo';
-import WarningButton from './components/WarningButton';
 
 
 
@@ -25,7 +24,6 @@ export default function Start() {
         <Button title="Registrieren" variant="primary" />
       </Link>
 
-      <WarningButton onPress={() => console.log('Warning pressed')} />
     </View>
   );
 }

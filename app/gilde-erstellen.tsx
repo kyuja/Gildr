@@ -378,23 +378,23 @@ const styles = StyleSheet.create({
   },
   toast: {
   position: "absolute",
-  bottom: 140,
+  bottom: 400,
   left: 30,
   right: 30,
-  backgroundColor: "#ffffff",
+  backgroundColor: "rgb(32, 4, 4)",
   paddingVertical: 12,
   paddingHorizontal: 20,
   borderRadius: 20,
   alignItems: "center",
   opacity: 0.9,
-  borderColor: "#631826",
+  borderColor: "#080203",
   borderWidth: 2,
 },
 
 toastText: {
-  color: "#000000",
+  color: "#ffffff",
   fontSize: 20,
-  fontWeight: "600",
+  fontWeight: "800",
 },
 });
 

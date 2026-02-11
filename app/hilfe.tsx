@@ -51,7 +51,7 @@ export default function HilfeScreen() {
 
           {/* Erklärungspunkte */}
           <View style={styles.section}>
-            <View style={styles.sectSionTitleRow}>
+            <View style={styles.sectionTitleRow}>
               <Ionicons name="search" size={20} color="#111" />
               <Text style={styles.sectionTitle}>Suchleiste</Text>
             </View>
