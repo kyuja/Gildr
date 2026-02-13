@@ -49,7 +49,7 @@ export default function HilfeScreen() {
 
           {/* Erklärungspunkte */}
           <View style={styles.section}>
-            <View style={styles.sectSionTitleRow}>
+            <View style={styles.sectionTitleRow}>
               <Ionicons name="search" size={20} color="#111" />
               <Text style={styles.sectionTitle}>Formular</Text>
             </View>
@@ -67,7 +67,7 @@ export default function HilfeScreen() {
           </View>
 
           <View style={styles.section}>
-            <View style={styles.sectSionTitleRow}>
+            <View style={styles.sectionTitleRow}>
               <Ionicons name="search" size={20} color="#111" />
               <Text style={styles.sectionTitle}>Infos</Text>
             </View>
@@ -82,7 +82,7 @@ export default function HilfeScreen() {
           </View>
 
           <View style={styles.section}>
-            <View style={styles.sectSionTitleRow}>
+            <View style={styles.sectionTitleRow}>
               <Ionicons name="search" size={20} color="#111" />
               <Text style={styles.sectionTitle}>Upload</Text>
             </View>
@@ -100,7 +100,7 @@ export default function HilfeScreen() {
           </View>
 
           <View style={styles.section}>
-            <View style={styles.sectSionTitleRow}>
+            <View style={styles.sectionTitleRow}>
               <Ionicons name="search" size={20} color="#111" />
               <Text style={styles.sectionTitle}>Bestätigung</Text>
             </View>

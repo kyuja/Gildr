@@ -2,14 +2,15 @@ import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import React from "react";
 import {
-  Animated, Easing,
+  Animated,
+  Easing,
   FlatList,
   Image,
   Pressable,
   StyleSheet,
   Text,
   TextInput,
-  View
+  View,
 } from "react-native";
 
 import { BackAndSettingHeader } from "../components/BackAndSettingsHeader";
@@ -38,7 +39,6 @@ const DATA = [
     avatar: "",
   },
 ];
-
 
 function GuildCard({
   item,
@@ -92,67 +92,68 @@ function GuildCard({
 export default function listView() {
   const [favorites, setFavorites] = React.useState<Set<string>>(new Set());
 
-const [toastMsg, setToastMsg] = React.useState<string | null>(null);
-const toastAnim = React.useRef(new Animated.Value(0)).current;
-const toastTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [toastMsg, setToastMsg] = React.useState<string | null>(null);
+  const toastAnim = React.useRef(new Animated.Value(0)).current;
+  const toastTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
-const showToast = (msg: string) => {
-  setToastMsg(msg);
+  const showToast = (msg: string) => {
+    setToastMsg(msg);
 
-  if (toastTimer.current) clearTimeout(toastTimer.current);
-
-  Animated.timing(toastAnim, {
-    toValue: 1,
-    duration: 180,
-    easing: Easing.out(Easing.quad),
-    useNativeDriver: true,
-  }).start();
-
-  toastTimer.current = setTimeout(() => {
-    Animated.timing(toastAnim, {
-      toValue: 0,
-      duration: 180,
-      easing: Easing.in(Easing.quad),
-      useNativeDriver: true,
-    }).start(({ finished }) => {
-      if (finished) setToastMsg(null);
-    });
-  }, 2000);
-};
-
-React.useEffect(() => {
-  return () => {
     if (toastTimer.current) clearTimeout(toastTimer.current);
+
+    Animated.timing(toastAnim, {
+      toValue: 1,
+      duration: 180,
+      easing: Easing.out(Easing.quad),
+      useNativeDriver: true,
+    }).start();
+
+    toastTimer.current = setTimeout(() => {
+      Animated.timing(toastAnim, {
+        toValue: 0,
+        duration: 180,
+        easing: Easing.in(Easing.quad),
+        useNativeDriver: true,
+      }).start(({ finished }) => {
+        if (finished) setToastMsg(null);
+      });
+    }, 2000);
   };
-}, []);
-  
-  
+
+  React.useEffect(() => {
+    return () => {
+      if (toastTimer.current) clearTimeout(toastTimer.current);
+    };
+  }, []);
+
   const toggleFavorite = (id: string, title: string) => {
-  const wasFavorite = favorites.has(id);
+    const wasFavorite = favorites.has(id);
 
-  setFavorites((prev) => {
-    const next = new Set(prev);
-    wasFavorite ? next.delete(id) : next.add(id);
-    return next;
-  });
+    setFavorites((prev) => {
+      const next = new Set(prev);
+      wasFavorite ? next.delete(id) : next.add(id);
+      return next;
+    });
 
-  showToast(
-    wasFavorite
-      ? "Gilde wurde aus Favoriten entfernt"
-      : "Gilde wurde zu Favoriten hinzugefügt"
-  );
-};
+    showToast(
+      wasFavorite
+        ? "Gilde wurde aus Favoriten entfernt"
+        : "Gilde wurde zu Favoriten hinzugefügt",
+    );
+  };
 
   return (
     <View style={styles.container}>
-  
-         <BackAndSettingHeader useBack={true} useFallbackHref={"../home"} settingsHref={"/settings"}/>
+      <BackAndSettingHeader
+        useBack={true}
+        useFallbackHref={"../home"}
+        settingsHref={"/settings"}
+      />
 
-      <View style={styles.titlePill}>
+      <View style={styles.content}>
         <Text style={styles.title}>Neue Gilden entdecken</Text>
       </View>
 
-      <View style={{ height: 25 }} />
       <View style={styles.searchRow}>
         <View style={styles.searchBar}>
           <Ionicons name="search" size={25} />
@@ -182,27 +183,26 @@ React.useEffect(() => {
         )}
       />
       {toastMsg && (
-  <Animated.View
-    pointerEvents="none"
-    style={[
-      styles.toast,
-      {
-        opacity: toastAnim,
-        transform: [
-          {
-            translateY: toastAnim.interpolate({
-              inputRange: [0, 1],
-              outputRange: [12, 0],
-            }),
-          },
-        ],
-      },
-    ]}
-    
-  >
-    <Text style={styles.toastText}>{toastMsg}</Text>
-  </Animated.View>
-)}
+        <Animated.View
+          pointerEvents="none"
+          style={[
+            styles.toast,
+            {
+              opacity: toastAnim,
+              transform: [
+                {
+                  translateY: toastAnim.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [12, 0],
+                  }),
+                },
+              ],
+            },
+          ]}
+        >
+          <Text style={styles.toastText}>{toastMsg}</Text>
+        </Animated.View>
+      )}
     </View>
   );
 }
@@ -211,41 +211,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#77363E",
-    paddingHorizontal: 16,
+    paddingHorizontal: 20,
+    paddingBottom: 5,
   },
-  topRow: {
-    width: "100%",
+
+  content: {
+    backgroundColor: "#FFF",
+    borderRadius: 10,
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: 16,
-    marginBottom: 16,
-  },
-  circleIcon: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    backgroundColor: "#fff",
     justifyContent: "center",
     alignItems: "center",
-  },
-  titlePill: {
-    backgroundColor: "#fff",
-    borderRadius: 12,
     paddingVertical: 10,
-    paddingHorizontal: 20,
-    alignSelf: "center",
-    borderWidth: 2,
-    borderColor: "#000",
-    marginBottom: 14,
+    marginTop: 10,
+    marginBottom: 20,
   },
   title: {
-    alignSelf: "center",
     fontSize: 25,
-    fontWeight: "700",
-    fontFamily: "Inter-Bold",
-    color: "#000000ff",
-    marginBottom: 5,
+    fontWeight: "bold",
   },
   searchRow: {
     width: "100%",
@@ -268,8 +250,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   listContent: {
-    paddingBottom: 120,
-    gap: 14,
+    paddingBottom: 140,
+    gap: 20,
   },
   card: {
     backgroundColor: "#F6DDE0",
@@ -298,7 +280,7 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     flex: 1,
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "700",
     color: "#111",
   },
@@ -309,20 +291,19 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   toast: {
-  position: "absolute",
-  left: 16,
-  right: 16,
-  bottom: 40,
-  backgroundColor: "rgb(41, 9, 9)",
-  paddingVertical: 12,
-  paddingHorizontal: 14,
-  borderRadius: 12,
-},
-toastText: {
-  color: "#fff",
-  fontSize: 18,
-  fontWeight: "700",
-  textAlign: "center",
-},
+    position: "absolute",
+    left: 16,
+    right: 16,
+    bottom: 24,
+    backgroundColor: "rgb(41, 9, 9)",
+    paddingVertical: 12,
+    paddingHorizontal: 14,
+    borderRadius: 12,
+  },
+  toastText: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "700",
+    textAlign: "center",
+  },
 });
-
