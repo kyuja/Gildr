@@ -73,11 +73,8 @@ function GuildCard({
             e.stopPropagation();
             onEdit();
           }}
-          style={({ pressed }) => [
-            styles.editBtn,
-            pressed && { opacity: 0.7 },
-       ]}
-          hitSlop={8} 
+          style={({ pressed }) => [styles.editBtn, pressed && { opacity: 0.7 }]}
+          hitSlop={8}
         >
           <Ionicons name="create-outline" size={26} color="#333" />
         </Pressable>
@@ -92,10 +89,14 @@ function GuildCard({
 export default function MeineGilden() {
   return (
     <View style={styles.container}>
-           <BackAndSettingHeader useBack={true} useFallbackHref={"../home"} settingsHref={"/settings"}/>
-
-      <Text style={styles.headerTitle}>Meine Gilden</Text>
-
+      <BackAndSettingHeader
+        useBack={true}
+        useFallbackHref={"../home"}
+        settingsHref={"/settings"}
+      />
+      <View style={styles.content}>
+        <Text style={styles.title}>Meine Gilden</Text>
+      </View>
       <FlatList
         data={DATA}
         keyExtractor={(item) => item.id}
@@ -135,26 +136,29 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#77363E",
-
-    paddingHorizontal: 16,
+    paddingHorizontal: 20,
+    paddingBottom: 5,
   },
 
-
-  headerTitle: {
-    backgroundColor: "#fff",
-    textAlign: "center",
-    textAlignVertical: "center",
-    fontSize: 25,
+  content: {
+    backgroundColor: "#FFF",
     borderRadius: 10,
-    height: 50,
-    fontWeight: "bold",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 10,
+    marginTop: 10,
     marginBottom: 20,
-    marginHorizontal: 16,
+  },
+
+  title: {
+    fontSize: 25,
+    fontWeight: "bold",
   },
 
   listContent: {
-    paddingBottom: 120,
-    gap: 14,
+    paddingBottom: 140,
+    gap: 20,
   },
 
   card: {
@@ -188,7 +192,7 @@ const styles = StyleSheet.create({
 
   cardTitle: {
     flex: 1,
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "700",
     color: "#111",
   },
@@ -222,14 +226,13 @@ const styles = StyleSheet.create({
 
   fabText: {
     textAlign: "center",
-    fontSize: 14,
+    fontSize: 18,
     fontWeight: "700",
     color: "#111",
-    lineHeight: 16,
   },
   editBtn: {
-  padding: 20,        
-  borderRadius: 900,
-  backgroundColor: "rgba(231, 168, 168, 0.73)",
-},
+    padding: 20,
+    borderRadius: 900,
+    backgroundColor: "rgba(231, 168, 168, 0.73)",
+  },
 });

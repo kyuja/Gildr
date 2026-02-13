@@ -142,16 +142,17 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#77363E",
-    paddingTop: 70,
     paddingHorizontal: 20,
+    paddingBottom: 5,
+    backgroundColor: "#77363E",
   },
 
   searchRow: {
     flexDirection: "row",
     alignItems: "center",
     gap: 10,
-    marginBottom: 20,
+    marginTop: 20,
+    marginBottom: 10,
   },
 
   searchBar: {
@@ -160,32 +161,34 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 10,
+    paddingHorizontal: 15,
     height: 50,
   },
 
   input: {
     marginLeft: 6,
     flex: 1,
-    fontSize: 16,
+    fontSize: 20,
   },
 
   content: {
-    marginBottom: 18,
+    backgroundColor: "#FFF",
+    borderRadius: 10,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 10,
+    marginTop: 10,
+    marginBottom: 20,
   },
 
   title: {
-    backgroundColor: "#fff",
-    textAlign: "center",
-    textAlignVertical: "center",
-    fontSize: 20,
-    borderRadius: 10,
-    height: 40,
+    fontSize: 25,
     fontWeight: "bold",
   },
 
   listContent: {
-    paddingBottom: 30,
+    gap: 10,
   },
 
   columnWrapper: {

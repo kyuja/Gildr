@@ -4,9 +4,9 @@ import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { BackAndSettingHeader } from "../components/BackAndSettingsHeader";
 
 export default function BeitretenScreen() {
-   const [showToast, setShowToast] = useState(false);
-  
-   const handleJoinPress = () => {
+  const [showToast, setShowToast] = useState(false);
+
+  const handleJoinPress = () => {
     Alert.alert(
       "Gilde beitreten",
       "Möchten Sie dieser Gilde wirklich beitreten?",
@@ -26,34 +26,33 @@ export default function BeitretenScreen() {
             }, 1500);
           },
         },
-      ]
+      ],
     );
   };
   return (
     <View style={styles.container}>
-       <BackAndSettingHeader useBack={true} useFallbackHref={"../home"} settingsHref={"/settings"}/>
+      <BackAndSettingHeader
+        useBack={true}
+        useFallbackHref={"../home"}
+        settingsHref={"/settings"}
+      />
 
       <View style={styles.content}>
         <Text style={styles.title}>Generic Title</Text>
-
-        <Text style={styles.description}>Beschreibung ...</Text>
       </View>
+      <Text style={styles.description}>Beschreibung ...</Text>
 
-      <TouchableOpacity
-        style={styles.joinButton}
-        onPress={handleJoinPress}
-      >
+      <TouchableOpacity style={styles.joinButton} onPress={handleJoinPress}>
         <Text style={styles.joinText}>Beitreten</Text>
       </TouchableOpacity>
 
       {showToast && (
-      <View style={styles.toast}>
-      <Text style={styles.toastText}>
-        Sie sind jetzt Mitglied der Gilde
-      </Text>
-      </View>
-)}
-
+        <View style={styles.toast}>
+          <Text style={styles.toastText}>
+            Sie sind jetzt Mitglied der Gilde
+          </Text>
+        </View>
+      )}
     </View>
   );
 }
@@ -63,27 +62,23 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#77363E",
     paddingHorizontal: 20,
-  },
-
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 20,
+    paddingBottom: 5,
   },
 
   content: {
-    flex: 1,
+    backgroundColor: "#FFF",
+    borderRadius: 10,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 10,
+    marginTop: 10,
+    marginBottom: 20,
   },
 
   title: {
-    backgroundColor: "#fff",
-    textAlign: "center",
-    textAlignVertical: "center",
     fontSize: 25,
-    borderRadius: 10,
-    height: 50,
     fontWeight: "bold",
-    marginBottom: 20,
   },
 
   description: {
@@ -92,6 +87,7 @@ const styles = StyleSheet.create({
     padding: 20,
     height: 400,
     fontSize: 20,
+    marginBottom: 50,
   },
 
   joinButton: {
@@ -107,21 +103,21 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   toast: {
-  position: "absolute",
-  bottom: 100,
-  left: 30,
-  right: 30,
-  backgroundColor: "rgb(32, 4, 4)",
-  paddingVertical: 12,
-  paddingHorizontal: 20,
-  borderRadius: 20,
-  alignItems: "center",
-  opacity: 0.9,
-},
+    position: "absolute",
+    bottom: 100,
+    left: 30,
+    right: 30,
+    backgroundColor: "rgb(32, 4, 4)",
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+    alignItems: "center",
+    opacity: 0.9,
+  },
 
-toastText: {
-  color: "#ffffff",
-  fontSize: 20,
-  fontWeight: "600",
-},
+  toastText: {
+    color: "#ffffff",
+    fontSize: 20,
+    fontWeight: "600",
+  },
 });

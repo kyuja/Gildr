@@ -14,7 +14,6 @@ import {
 import { BackAndSettingHeader } from "./components/BackAndSettingsHeader";
 
 export default function GildeBearbeiten() {
-
   const [showToast, setShowToast] = useState(false);
   // ------------- Form States -------------
   const [name, setName] = useState("");
@@ -24,8 +23,8 @@ export default function GildeBearbeiten() {
   const [wann, setWann] = useState("");
 
   // ------------- Upload States (nur lokal) -------------
-  const [logo, setLogo] = useState(null); // { uri, ... }
-  const [bilder, setBilder] = useState([]); // Array von Assets
+  const [logo, setLogo] = useState<ImagePicker.ImagePickerAsset | null>(null); // { uri, ... }
+  const [bilder, setBilder] = useState<ImagePicker.ImagePickerAsset[]>([]); // Array von Assets
 
   const resetForm = () => {
     setName("");
@@ -41,7 +40,10 @@ export default function GildeBearbeiten() {
     // Berechtigung (iOS/Android)
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (status !== "granted") {
-      Alert.alert("Berechtigung fehlt", "Bitte erlaube Zugriff auf deine Fotos.");
+      Alert.alert(
+        "Berechtigung fehlt",
+        "Bitte erlaube Zugriff auf deine Fotos.",
+      );
       return;
     }
 
@@ -60,7 +62,10 @@ export default function GildeBearbeiten() {
   const pickBilder = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (status !== "granted") {
-      Alert.alert("Berechtigung fehlt", "Bitte erlaube Zugriff auf deine Fotos.");
+      Alert.alert(
+        "Berechtigung fehlt",
+        "Bitte erlaube Zugriff auf deine Fotos.",
+      );
       return;
     }
 
@@ -81,38 +86,40 @@ export default function GildeBearbeiten() {
     resetForm();
   };
 
-      
-       const handleConfirmPress = () => {
-        Alert.alert(
-          "Gilde bearbeiten",
-          "Möchten Sie diese Änderungen übernehmen?",
-          [
-            {
-              text: "Abbrechen",
-              style: "cancel",
-            },
-            {
-              text: "Bestätigen",
-              onPress: () => {
-                setShowToast(true);
-    
-                setTimeout(() => {
-                  setShowToast(false);
-                  router.back();
-                }, 1500);
-              },
-            },
-          ]
-        );
-      };
+  const handleConfirmPress = () => {
+    Alert.alert(
+      "Gilde bearbeiten",
+      "Möchten Sie diese Änderungen übernehmen?",
+      [
+        {
+          text: "Abbrechen",
+          style: "cancel",
+        },
+        {
+          text: "Bestätigen",
+          onPress: () => {
+            setShowToast(true);
 
+            setTimeout(() => {
+              setShowToast(false);
+              router.back();
+            }, 1500);
+          },
+        },
+      ],
+    );
+  };
 
   return (
     <View style={styles.container}>
-       <BackAndSettingHeader useBack={true} useFallbackHref={"../home"} settingsHref={"/settings"}/>
-
-      <Text style={styles.headerTitle}>Gilde bearbeiten</Text>
-
+      <BackAndSettingHeader
+        useBack={true}
+        useFallbackHref={"../home"}
+        settingsHref={"/settings"}
+      />
+      <View style={styles.content}>
+        <Text style={styles.title}>Gilde bearbeiten</Text>
+      </View>
       <View style={styles.card}>
         <ScrollView
           contentContainerStyle={styles.form}
@@ -202,7 +209,11 @@ export default function GildeBearbeiten() {
           {bilder.length > 0 && (
             <View style={styles.gallery}>
               {bilder.map((img, idx) => (
-                <Image key={img.uri ?? idx} source={{ uri: img.uri }} style={styles.thumb} />
+                <Image
+                  key={img.uri ?? idx}
+                  source={{ uri: img.uri }}
+                  style={styles.thumb}
+                />
               ))}
               <Pressable
                 onPress={() => setBilder([])}
@@ -241,17 +252,16 @@ export default function GildeBearbeiten() {
             </Pressable>
 
             {showToast && (
-        <View style={styles.toast}>
-        <Text style={styles.toastText}>Änderungen gespeichert</Text>
-  </View>
-)}
+              <View style={styles.toast}>
+                <Text style={styles.toastText}>Änderungen gespeichert</Text>
+              </View>
+            )}
           </View>
         </ScrollView>
       </View>
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {
@@ -260,19 +270,29 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
   },
 
-
-  headerTitle: {
-    backgroundColor: "#fff",
-    textAlign: "center",
-    textAlignVertical: "center",
-    fontSize: 25,
+  content: {
+    backgroundColor: "#FFF",
     borderRadius: 10,
-    height: 50,
-    fontWeight: "bold",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 10,
+    marginTop: 10,
     marginBottom: 20,
   },
 
-  card: { backgroundColor: "#fff", borderRadius: 28, padding: 18, marginBottom: 30, maxHeight: "75%",  },
+  title: {
+    fontSize: 25,
+    fontWeight: "bold",
+  },
+
+  card: {
+    backgroundColor: "#fff",
+    borderRadius: 28,
+    padding: 18,
+    marginBottom: 30,
+    maxHeight: "75%",
+  },
   form: { gap: 10, paddingBottom: 20 },
 
   input: {
@@ -371,23 +391,23 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
   toast: {
-  position: "absolute",
-  bottom: 100,
-  left: 30,
-  right: 30,
-  backgroundColor: "#ffffff",
-  paddingVertical: 12,
-  paddingHorizontal: 20,
-  borderRadius: 20,
-  alignItems: "center",
-  borderColor: "#000000",
-  borderWidth: 1,
-  opacity: 0.9,
-},
+    position: "absolute",
+    bottom: 100,
+    left: 30,
+    right: 30,
+    backgroundColor: "#ffffff",
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+    alignItems: "center",
+    borderColor: "#000000",
+    borderWidth: 1,
+    opacity: 0.9,
+  },
 
-toastText: {
-  color: "#000000",
-  fontSize: 20,
-  fontWeight: "600",
-},
+  toastText: {
+    color: "#000000",
+    fontSize: 20,
+    fontWeight: "600",
+  },
 });

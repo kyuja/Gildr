@@ -9,7 +9,7 @@ import {
   Pressable,
   StyleSheet,
   Text,
-  View
+  View,
 } from "react-native";
 import { BackAndSettingHeader } from "../components/BackAndSettingsHeader";
 
@@ -37,7 +37,6 @@ const DATA = [
     avatar: "",
   },
 ];
-
 
 function GuildCard({
   item,
@@ -90,24 +89,24 @@ function GuildCard({
 }
 
 export default function HomeScreen() {
-   const [favorites, setFavorites] = React.useState<Set<string>>(new Set());
-  
+  const [favorites, setFavorites] = React.useState<Set<string>>(new Set());
+
   const [toastMsg, setToastMsg] = React.useState<string | null>(null);
   const toastAnim = React.useRef(new Animated.Value(0)).current;
   const toastTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
-  
+
   const showToast = (msg: string) => {
     setToastMsg(msg);
-  
+
     if (toastTimer.current) clearTimeout(toastTimer.current);
-  
+
     Animated.timing(toastAnim, {
       toValue: 1,
       duration: 180,
       easing: Easing.out(Easing.quad),
       useNativeDriver: true,
     }).start();
-  
+
     toastTimer.current = setTimeout(() => {
       Animated.timing(toastAnim, {
         toValue: 0,
@@ -119,36 +118,37 @@ export default function HomeScreen() {
       });
     }, 2000);
   };
-  
+
   React.useEffect(() => {
     return () => {
       if (toastTimer.current) clearTimeout(toastTimer.current);
     };
   }, []);
-    
-    
-    const toggleFavorite = (id: string, title: string) => {
+
+  const toggleFavorite = (id: string, title: string) => {
     const wasFavorite = favorites.has(id);
-  
+
     setFavorites((prev) => {
       const next = new Set(prev);
       wasFavorite ? next.delete(id) : next.add(id);
       return next;
     });
-  
+
     showToast(
       wasFavorite
         ? "Gilde wurde aus Favoriten entfernt"
-        : "Gilde wurde zu Favoriten hinzugefügt"
+        : "Gilde wurde zu Favoriten hinzugefügt",
     );
   };
 
   return (
-      <View style={styles.container}>
-      <View style={{ paddingHorizontal:20 }}>
-      <BackAndSettingHeader useBack={true} useFallbackHref={"../home"} settingsHref={"/settings"}/>
-      </View>
-      <View style={styles.container}>
+    <View style={styles.container}>
+      <BackAndSettingHeader
+        useBack={true}
+        useFallbackHref={"../home"}
+        settingsHref={"/settings"}
+      />
+
       <View style={styles.content}>
         <Text style={styles.title}>Beigetretene Gilden</Text>
       </View>
@@ -174,27 +174,26 @@ export default function HomeScreen() {
         )}
       />
       {toastMsg && (
-  <Animated.View
-    pointerEvents="none"
-    style={[
-      styles.toast,
-      {
-        opacity: toastAnim,
-        transform: [
-          {
-            translateY: toastAnim.interpolate({
-              inputRange: [0, 1],
-              outputRange: [12, 0],
-            }),
-          },
-        ],
-      },
-    ]}
-  >
-    <Text style={styles.toastText}>{toastMsg}</Text>
-  </Animated.View>
-)}
-    </View>
+        <Animated.View
+          pointerEvents="none"
+          style={[
+            styles.toast,
+            {
+              opacity: toastAnim,
+              transform: [
+                {
+                  translateY: toastAnim.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [12, 0],
+                  }),
+                },
+              ],
+            },
+          ]}
+        >
+          <Text style={styles.toastText}>{toastMsg}</Text>
+        </Animated.View>
+      )}
     </View>
   );
 }
@@ -202,34 +201,28 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingHorizontal: 20,
+    paddingBottom: 5,
     backgroundColor: "#77363E",
   },
 
-  
-
   content: {
-    paddingHorizontal: 20,
-    textAlign: "center",
+    backgroundColor: "#FFF",
+    borderRadius: 10,
+    flexDirection: "row",
     justifyContent: "center",
-    flex: 1,
-    marginBottom: 40,
-    paddingTop: 30,
-    
+    alignItems: "center",
+    paddingVertical: 10,
+    marginTop: 10,
+    marginBottom: 20,
   },
 
   title: {
-    backgroundColor: "#fff",
-    textAlign: "center",
-    textAlignVertical: "center",
     fontSize: 25,
-    borderRadius: 10,
-    height: 50,
     fontWeight: "bold",
-    marginBottom: 15,
   },
 
   listContent: {
-    paddingHorizontal: 20,
     paddingBottom: 140,
     gap: 20,
   },
@@ -272,20 +265,19 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   toast: {
-  position: "absolute",
-  left: 16,
-  right: 16,
-  bottom: 24,
-  backgroundColor: "rgb(41, 9, 9)",
-  paddingVertical: 12,
-  paddingHorizontal: 14,
-  borderRadius: 12,
-},
-toastText: {
-  color: "#fff",
-  fontSize: 18,
-  fontWeight: "700",
-  textAlign: "center",
-},
+    position: "absolute",
+    left: 16,
+    right: 16,
+    bottom: 24,
+    backgroundColor: "rgb(41, 9, 9)",
+    paddingVertical: 12,
+    paddingHorizontal: 14,
+    borderRadius: 12,
+  },
+  toastText: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "700",
+    textAlign: "center",
+  },
 });
-

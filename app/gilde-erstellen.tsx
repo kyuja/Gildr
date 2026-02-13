@@ -22,8 +22,8 @@ export default function GildeErstellen() {
   const [wann, setWann] = useState("");
 
   // ------------- Upload States (nur lokal) -------------
-  const [logo, setLogo] = useState(null); // { uri, ... }
-  const [bilder, setBilder] = useState([]); // Array von Assets
+  const [logo, setLogo] = useState<ImagePicker.ImagePickerAsset | null>(null); // { uri, ... }
+  const [bilder, setBilder] = useState<ImagePicker.ImagePickerAsset[]>([]); // Array von Assets
 
   const resetForm = () => {
     setName("");
@@ -39,7 +39,10 @@ export default function GildeErstellen() {
     // Berechtigung (iOS/Android)
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (status !== "granted") {
-      Alert.alert("Berechtigung fehlt", "Bitte erlaube Zugriff auf deine Fotos.");
+      Alert.alert(
+        "Berechtigung fehlt",
+        "Bitte erlaube Zugriff auf deine Fotos.",
+      );
       return;
     }
 
@@ -58,7 +61,10 @@ export default function GildeErstellen() {
   const pickBilder = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (status !== "granted") {
-      Alert.alert("Berechtigung fehlt", "Bitte erlaube Zugriff auf deine Fotos.");
+      Alert.alert(
+        "Berechtigung fehlt",
+        "Bitte erlaube Zugriff auf deine Fotos.",
+      );
       return;
     }
 
@@ -80,35 +86,40 @@ export default function GildeErstellen() {
   };
 
   const [showToast, setShowToast] = useState(false);
-    
-     const handleJoinPress = () => {
-      Alert.alert(
-        "Gilde erstellen",
-        "Möchten Sie diese Gilde wirklich erstellen?",
-        [
-          {
-            text: "Abbrechen",
-            style: "cancel",
+
+  const handleJoinPress = () => {
+    Alert.alert(
+      "Gilde erstellen",
+      "Möchten Sie diese Gilde wirklich erstellen?",
+      [
+        {
+          text: "Abbrechen",
+          style: "cancel",
+        },
+        {
+          text: "Bestätigen",
+          onPress: () => {
+            setShowToast(true);
+            setTimeout(() => {
+              setShowToast(false);
+              router.back();
+            }, 1500);
           },
-          {
-            text: "Bestätigen",
-            onPress: () => {
-              setShowToast(true);
-              setTimeout(() => {
-                setShowToast(false);
-                router.back();
-              }, 1500);
-            },
-          },
-        ]
-      );
-    };
+        },
+      ],
+    );
+  };
 
   return (
     <View style={styles.container}>
-       <BackAndSettingHeader useBack={true} useFallbackHref={"../home"} settingsHref={"/settings"}/>
-
-      <Text style={styles.headerTitle}>Gilde erstellen</Text>
+      <BackAndSettingHeader
+        useBack={true}
+        useFallbackHref={"../home"}
+        settingsHref={"/settings"}
+      />
+      <View style={styles.content}>
+        <Text style={styles.title}>Gilde erstellen</Text>
+      </View>
 
       <View style={styles.card}>
         <ScrollView
@@ -199,7 +210,11 @@ export default function GildeErstellen() {
           {bilder.length > 0 && (
             <View style={styles.gallery}>
               {bilder.map((img, idx) => (
-                <Image key={img.uri ?? idx} source={{ uri: img.uri }} style={styles.thumb} />
+                <Image
+                  key={img.uri ?? idx}
+                  source={{ uri: img.uri }}
+                  style={styles.thumb}
+                />
               ))}
               <Pressable
                 onPress={() => setBilder([])}
@@ -239,11 +254,9 @@ export default function GildeErstellen() {
         </ScrollView>
       </View>
       {showToast && (
-            <View style={styles.toast}>
-            <Text style={styles.toastText}>
-              Eine neue Gilde wurde erstellt!
-            </Text>
-            </View>
+        <View style={styles.toast}>
+          <Text style={styles.toastText}>Eine neue Gilde wurde erstellt!</Text>
+        </View>
       )}
     </View>
   );
@@ -256,24 +269,28 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
   },
 
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 30,
-  },
-
-  headerTitle: {
-    backgroundColor: "#fff",
-    textAlign: "center",
-    textAlignVertical: "center",
-    fontSize: 25,
+  content: {
+    backgroundColor: "#FFF",
     borderRadius: 10,
-    height: 50,
-    fontWeight: "bold",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 10,
+    marginTop: 10,
     marginBottom: 20,
   },
 
-  card: { backgroundColor: "#fff", borderRadius: 28, padding: 18, marginBottom: 50 },
+  title: {
+    fontSize: 25,
+    fontWeight: "bold",
+  },
+
+  card: {
+    backgroundColor: "#fff",
+    borderRadius: 28,
+    padding: 18,
+    marginBottom: 50,
+  },
   form: { gap: 10, paddingBottom: 10 },
 
   input: {
@@ -372,24 +389,23 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
   toast: {
-  position: "absolute",
-  bottom: 400,
-  left: 30,
-  right: 30,
-  backgroundColor: "rgb(32, 4, 4)",
-  paddingVertical: 12,
-  paddingHorizontal: 20,
-  borderRadius: 20,
-  alignItems: "center",
-  opacity: 0.9,
-  borderColor: "#080203",
-  borderWidth: 2,
-},
+    position: "absolute",
+    bottom: 400,
+    left: 30,
+    right: 30,
+    backgroundColor: "rgb(32, 4, 4)",
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+    alignItems: "center",
+    opacity: 0.9,
+    borderColor: "#080203",
+    borderWidth: 2,
+  },
 
-toastText: {
-  color: "#ffffff",
-  fontSize: 20,
-  fontWeight: "800",
-},
+  toastText: {
+    color: "#ffffff",
+    fontSize: 20,
+    fontWeight: "800",
+  },
 });
-
