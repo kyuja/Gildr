@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 10,
-    marginTop: 20,
+    marginTop: 65,
     marginBottom: 10,
   },
 

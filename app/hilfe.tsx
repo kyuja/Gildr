@@ -7,16 +7,23 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 
 export default function Hilfe() {
   return (
     <View style={styles.container}>
+      <TouchableOpacity
+                onPress={() => router.back()}
+                hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                activeOpacity={0.7}
+              >
+                <Ionicons name="arrow-back" size={36} color="#ffffff" />
+              </TouchableOpacity>
       <ScrollView contentContainerStyle={styles.content}>
         <Text style={styles.title}>Hilfe & Anleitung</Text>
 
-        {/* STARTSEITE BUTTON */}
         <Pressable
           onPress={() => router.push("/hilfe-startseite")}
           style={({ pressed }) => [
